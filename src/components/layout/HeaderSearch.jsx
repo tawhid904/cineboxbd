@@ -33,19 +33,19 @@ export default function HeaderSearch() {
 				type="button"
 				onClick={() => setOpen(true)}
 				aria-label="Search movies and TV shows"
-				className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface/70 text-muted transition hover:border-accent hover:text-ink"
+				className="flex h-9 w-9 items-center justify-center rounded-full border border-white/5 bg-white/10 text-white transition-colors duration-150 hover:bg-white/20 active:scale-95"
 			>
-					<svg
-						viewBox="0 0 20 20"
-						className="h-4 w-4"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="1.8"
-						aria-hidden="true"
-					>
-						<circle cx="9" cy="9" r="5.5" />
-						<path d="M13.5 13.5L17 17" strokeLinecap="round" />
-					</svg>
+				<svg
+					viewBox="0 0 20 20"
+					className="h-4 w-4"
+					fill="none"
+					stroke="currentColor"
+					strokeWidth="1.8"
+					aria-hidden="true"
+				>
+					<circle cx="9" cy="9" r="5.5" />
+					<path d="M13.5 13.5L17 17" strokeLinecap="round" />
+				</svg>
 			</button>
 
 			{open ? (

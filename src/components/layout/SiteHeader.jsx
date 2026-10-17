@@ -8,7 +8,7 @@ import MobileNav from "./MobileNav";
 function NavFallback() {
 	return (
 		<div
-			className="h-9 w-52 rounded-full border border-line bg-surface/70"
+			className="h-9 w-72 rounded-full border border-white/5 bg-white/10"
 			aria-hidden="true"
 		/>
 	);
