@@ -33,7 +33,7 @@ export default function HeaderSearch() {
 				type="button"
 				onClick={() => setOpen(true)}
 				aria-label="Search movies and TV shows"
-				className="flex h-9 w-9 items-center justify-center rounded-full border border-white/5 bg-white/10 text-white transition-colors duration-150 hover:bg-white/20 active:scale-95"
+				className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-surface/70 text-muted transition hover:border-accent hover:text-ink"
 			>
 				<svg
 					viewBox="0 0 20 20"
