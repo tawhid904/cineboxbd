@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import Link from "next/link";
+import Logo from "./Logo";
 import PillNav from "./PillNav";
 import HeaderSearch from "./HeaderSearch";
 import MobileNav from "./MobileNav";
@@ -29,9 +30,9 @@ export default function SiteHeader() {
 				<Link
 					href="/"
 					aria-label="CINEBOXBD home"
-					className="shrink-0 font-display text-lg tracking-tight text-ink transition hover:text-accent md:text-xl"
+					className="group inline-flex shrink-0 items-center"
 				>
-					CINEBOXBD
+					<Logo priority className="aspect-[819/106] h-6 w-auto md:h-7" />
 				</Link>
 				<Suspense fallback={<NavFallback />}>
 					<PillNav />

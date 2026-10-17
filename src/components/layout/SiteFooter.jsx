@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Logo from "./Logo";
 import NewsletterForm from "./NewsletterForm";
 import { collageGenres } from "@/config/site";
 
@@ -65,10 +66,14 @@ export default function SiteFooter() {
 				</p>
 			</div>
 
-			<div className="overflow-hidden px-2 pb-4" aria-hidden="true">
-				<p className="select-none whitespace-nowrap text-center font-display leading-[0.78] tracking-[-0.03em] text-ink/95" style={{ fontSize: "clamp(2.75rem, 14vw, 15rem)" }}>
-					CINEBOXBD
-				</p>
+			<div className="flex justify-center overflow-hidden px-2 pb-4" aria-hidden="true">
+				<Logo
+					className="block aspect-[819/106] h-auto w-[clamp(17.45rem,88.83vw,95.18rem)] max-w-full select-none"
+					style={{
+						marginTop:
+							"calc((clamp(2.75rem, 14vw, 15rem) * 0.78 - clamp(17.45rem, 88.83vw, 95.18rem) * (106 / 819)) / 2)",
+					}}
+				/>
 			</div>
 		</footer>
 	);

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { site } from "@/config/site";
 import { cn } from "@/lib/cn";
+import Logo from "./Logo";
 
 const EASE = "ease-[cubic-bezier(0.22,1,0.36,1)]";
 
@@ -101,9 +102,7 @@ export default function MobileNav() {
 				)}
 			>
 				<div className="flex items-center justify-between border-b border-line px-6 pb-4 pt-[max(1.25rem,env(safe-area-inset-top))]">
-					<span className="font-display text-base tracking-tight text-ink">
-						CINEBOXBD
-					</span>
+					<Logo isDrawerOpen={open} className="aspect-[819/106] h-5 w-auto" />
 					<span className="font-mono text-[10px] uppercase tracking-[0.24em] text-accent">
 						Menu
 					</span>
