@@ -182,7 +182,7 @@ export async function getHeroItems(limit = 5) {
 	return items;
 }
 
-/** First 4 poster paths for a genre — used by the genre collage cards. */
+/** First 4 poster paths for a genre - used by the genre collage cards. */
 export async function getGenreCollage(genreId) {
 	const data = await discoverMovies({ genres: genreId, page: 1 });
 	return data.results.filter((r) => r.poster_path).slice(0, 4);

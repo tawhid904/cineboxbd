@@ -1,7 +1,7 @@
+import SiteFooter from "@/components/layout/SiteFooter";
+import SiteHeader from "@/components/layout/SiteHeader";
 import { Archivo, Archivo_Black, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import SiteHeader from "@/components/layout/SiteHeader";
-import SiteFooter from "@/components/layout/SiteFooter";
 
 const archivo = Archivo({
 	subsets: ["latin"],
@@ -24,11 +24,11 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
 	title: {
-		default: "MOVIEBOXBD — Films & series, hand-picked.",
-		template: "%s · MOVIEBOXBD",
+		default: "CINEBOXBD - Home",
+		template: "CINEBOXBD - %s",
 	},
 	description:
-		"MOVIEBOXBD is a carefully kept guide to what to watch next — real ratings, honest picks, nothing buried in noise.",
+		"Trending films and series with real ratings and genre rows that make sense. Pick something good tonight.",
 };
 
 export default function RootLayout({ children }) {
@@ -41,11 +41,11 @@ export default function RootLayout({ children }) {
 		>
 			{/* Browser extensions may inject attributes into <html>/<body> before
 			    React hydrates. suppressHydrationWarning silences attribute-level
-			    mismatches on these two elements only — children are still checked. */}
+			    mismatches on these two elements only - children are still checked. */}
 			<body className="flex min-h-full flex-col" suppressHydrationWarning>
 				<SiteHeader />
 				<main id="main" className="flex-1">
-						{children}
+					{children}
 				</main>
 				<SiteFooter />
 			</body>

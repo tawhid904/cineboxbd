@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-	/* ── Palette: dark cinema — near-black canvas, one red accent, gold for ratings ── */
+	/* ── Palette: dark cinema - near-black canvas, one red accent, gold for ratings ── */
 	--color-bg: #0a0a0b;
 	--color-elevated: #121214;
 	--color-surface: #17171a;
@@ -73,7 +73,7 @@
 	}
 }
 
-/* Functional scrims — gradients exist only to keep text legible over photos */
+/* Functional scrims - gradients exist only to keep text legible over photos */
 @layer utilities {
 	.scrim-b {
 		background-image: linear-gradient(

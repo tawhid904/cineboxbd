@@ -66,7 +66,7 @@ export async function generateMetadata({ params }) {
 export default function TvDetailPage({ params }) {
 	if (!hasTmdbCredentials()) return <ApiKeyNotice />;
 
-	// `params` is URL data — keep the read inside Suspense so navigation can
+	// `params` is URL data - keep the read inside Suspense so navigation can
 	// paint the shared shell + skeleton instantly (instant-shell rule).
 	return (
 		<Suspense fallback={<DetailSkeleton />}>
@@ -116,7 +116,7 @@ async function TvDetailContent({ params }) {
 				{recommendations.length ? (
 					<Carousel
 						title="More like this"
-						sub={`If you liked ${item.title}, these share the vibe.`}
+						sub={`If you liked ${item.title}, start here.`}
 						items={recommendations}
 						viewAllHref={
 							item.genreIds.length

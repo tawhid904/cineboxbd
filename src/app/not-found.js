@@ -7,11 +7,10 @@ export default function NotFound() {
 				404
 			</p>
 			<h1 className="mt-4 font-display text-[clamp(1.5rem,3vw,2.25rem)] text-ink">
-				This reel is missing.
+				Page not found.
 			</h1>
 			<p className="mt-3 max-w-md text-sm text-muted">
-				The page you&apos;re after doesn&apos;t exist — but the catalogue
-				does.
+				That page doesn&apos;t exist. The films do.
 			</p>
 			<div className="mt-8 flex flex-wrap items-center justify-center gap-3">
 				<Link
@@ -21,10 +20,10 @@ export default function NotFound() {
 					Back home
 				</Link>
 				<Link
-					href="/search"
+					href="/trending"
 					className="rounded-full border border-line bg-surface px-6 py-3 text-sm font-semibold text-ink transition hover:border-accent"
 				>
-					Search something
+					Browse trending
 				</Link>
 			</div>
 		</div>

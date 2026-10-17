@@ -42,7 +42,7 @@ export default function NowWatchingHero({ slides }) {
 			aria-label="Now watching"
 			className="relative -mt-16 h-[clamp(560px,90vh,860px)] w-full overflow-hidden"
 		>
-			{/* Backdrop rotation — images are mounted only for the active slide
+			{/* Backdrop rotation - images are mounted only for the active slide
 			    and its immediate neighbours (circular distance). Keeps crossfades
 			    smooth, avoids downloading every w1280 backdrop up front, and
 			    prevents dev-only "100vw" size warnings from full-width images that

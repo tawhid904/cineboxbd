@@ -19,7 +19,7 @@ import { collageGenres, homeGenreRows, homeTvRow } from "@/config/site";
 
 export const metadata = {
 	description:
-		"What to watch tonight — trending films and series, curated genre rows and honest ratings. Welcome to MOVIEBOXBD.",
+		"Trending films and series with real ratings and genre rows that make sense. Pick something good tonight.",
 };
 
 export default async function HomePage() {

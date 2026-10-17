@@ -79,7 +79,7 @@ export default async function BrowseCollection({ mediaType, searchParams }) {
 				<p className="mt-2 text-sm leading-relaxed text-muted">
 					{values.q
 						? `Matched in ${isMovie ? "movies" : "TV shows"}.`
-						: "Filter by genre, sort by what matters, and open any title for the full breakdown."}
+						: "Filter by genre, sort a few ways, open anything for trailers, cast and ratings."}
 				</p>
 			</header>
 

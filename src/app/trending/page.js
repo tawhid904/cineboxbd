@@ -9,9 +9,9 @@ import { getGenreMap, getTrending, searchMulti } from "@/lib/tmdb/endpoints";
 import { normalizeCard } from "@/lib/tmdb/normalize";
 
 export const metadata = {
-	title: "Search",
+	title: "Trending",
 	description:
-		"Search films and series across the entire catalogue, or see what's trending today.",
+		"Trending today, plus search across the whole catalogue.",
 };
 
 function SearchContent({ searchParams }) {
@@ -39,7 +39,7 @@ async function SearchResults({ searchParams }) {
 		const params = new URLSearchParams();
 		if (q) params.set("q", q);
 		params.set("page", String(targetPage));
-		return `/search?${params.toString()}`;
+		return `/trending?${params.toString()}`;
 	};
 
 	return (
@@ -54,7 +54,7 @@ async function SearchResults({ searchParams }) {
 				<p className="mt-2 text-sm leading-relaxed text-muted">
 					{q
 						? `${data.total_results?.toLocaleString?.() ?? cards.length} matches across films and series.`
-						: "The most-watched films and series over the last 24 hours. Use the search in the header for anything specific."}
+						: "What people are actually watching right now."}
 				</p>
 			</header>
 

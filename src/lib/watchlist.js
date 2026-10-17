@@ -2,7 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 
-const STORAGE_KEY = "movieboxbd:history:v1";
+const STORAGE_KEY = "cineboxbd:history:v1";
 const MAX_ENTRIES = 12;
 const EMPTY = [];
 
@@ -40,7 +40,7 @@ export function readHistory() {
 	}
 }
 
-// Cached snapshot — useSyncExternalStore needs a stable reference
+// Cached snapshot - useSyncExternalStore needs a stable reference
 // between renders while the stored value is unchanged.
 let lastRaw = null;
 let lastSnapshot = EMPTY;
@@ -62,7 +62,7 @@ function getServerSnapshot() {
 	return EMPTY;
 }
 
-/** Real viewing history (Continue Watching) — reactive across tabs & navigation. */
+/** Real viewing history (Continue Watching) - reactive across tabs & navigation. */
 export function useHistory() {
 	return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
@@ -81,7 +81,7 @@ export function recordVisit(entry) {
 		lastRaw = null;
 		notify();
 	} catch {
-		// storage unavailable (private mode) — silently skip
+		// storage unavailable (private mode) - silently skip
 	}
 }
 

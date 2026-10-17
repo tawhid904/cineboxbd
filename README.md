@@ -1,14 +1,14 @@
-# MOVIEBOXBD
+# CINEBOXBD
 
-![MOVIEBOXBD preview](public/preview.png)
+![CINEBOXBD preview](public/preview.png)
 
-A movie & TV discovery website built with **Next.js 16.4** (App Router + Cache Components), **Tailwind CSS v4**, and the **TMDB API** — no dummy data anywhere: every title, poster, rating, certification and trailer is fetched live.
+A movie & TV discovery website built with **Next.js 16.4** (App Router + Cache Components), **Tailwind CSS v4**, and the **TMDB API** - no dummy data anywhere: every title, poster, rating, certification and trailer is fetched live.
 
 ## Getting started
 
 ### 1. Get a TMDB API key
 
-Free at <https://www.themoviedb.org/settings/api> — a v3 API key or a v4 read access token both work.
+Free at <https://www.themoviedb.org/settings/api> - a v3 API key or a v4 read access token both work.
 
 ### 2. Configure environment
 
@@ -46,7 +46,7 @@ src/
 │   ├── page.js            # Home (hero, continue watching, curated rows, genres, CTA)
 │   ├── movies/ tv/        # Browse w/ genre, sort, search, grid/list, pagination
 │   ├── movie/[id] tv/[id] # Detail pages (facts, cast, trailer, recommendations)
-│   ├── search/            # Search + trending
+│   ├── trending/            # Trending + search results
 │   ├── loading.js error.js not-found.js
 ├── components/
 │   ├── layout/            # SiteHeader, PillNav, HeaderSearch, MobileNav (drawer), SiteFooter
@@ -63,12 +63,12 @@ src/
 
 ## Key decisions
 
-- **Data fetching:** all reads happen in Server Components through `'use cache'` functions (`cacheLife`/`cacheTag` — the Next 16 Cache Components model), deduplicated with `Promise.all`.
+- **Data fetching:** all reads happen in Server Components through `'use cache'` functions (`cacheLife`/`cacheTag` - the Next 16 Cache Components model), deduplicated with `Promise.all`.
 - **Auth:** works with either a v3 `api_key` or a v4 `Authorization: Bearer` token.
 - **Images:** `next/image` with `remotePatterns` for the image CDN, responsive `sizes`, `preload` on hero/detail backdrops.
-- **State:** only interactive islands are client components (carousels, filters, search overlay, trailer modal, mobile drawer). "Continue Watching" uses real `localStorage` history — no fabricated entries.
+- **State:** only interactive islands are client components (carousels, filters, search overlay, trailer modal, mobile drawer). "Continue Watching" uses real `localStorage` history - no fabricated entries.
 - **Design:** dark cinema palette (near-black + single red accent + gold ratings), Archivo / Archivo Black / Geist Mono typography; gradients used **only** as legibility scrims over photos.
-- **Branding:** the public UI is provider-neutral — no data-source branding is rendered anywhere in the frontend.
+- **Branding:** the public UI is provider-neutral - no data-source branding is rendered anywhere in the frontend.
 
 ## Branding & attribution (owner note)
 

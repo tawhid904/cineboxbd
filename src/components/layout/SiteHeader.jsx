@@ -28,10 +28,10 @@ export default function SiteHeader() {
 			<div className="page-shell flex h-16 items-center justify-between gap-4">
 				<Link
 					href="/"
-					aria-label="MOVIEBOXBD home"
+					aria-label="CINEBOXBD home"
 					className="shrink-0 font-display text-lg tracking-tight text-ink transition hover:text-accent md:text-xl"
 				>
-					MOVIEBOXBD
+					CINEBOXBD
 				</Link>
 				<Suspense fallback={<NavFallback />}>
 					<PillNav />

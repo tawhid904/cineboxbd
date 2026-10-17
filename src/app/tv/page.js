@@ -1,13 +1,13 @@
-import { Suspense } from "react";
-import ApiKeyNotice from "@/components/ui/ApiKeyNotice";
 import BrowseCollection from "@/components/browse/BrowseCollection";
+import ApiKeyNotice from "@/components/ui/ApiKeyNotice";
 import { BrowseSkeleton } from "@/components/ui/Skeleton";
 import { hasTmdbCredentials } from "@/lib/tmdb/client";
+import { Suspense } from "react";
 
 export const metadata = {
-	title: "Browse TV shows",
+	title: "TV Shows",
 	description:
-		"Browse series by genre, rating, air date or popularity — the full series catalogue, curated for MOVIEBOXBD.",
+		"Every series on the catalogue, filterable by genre, rating, air date and popularity.",
 };
 
 export default function TvPage({ searchParams }) {

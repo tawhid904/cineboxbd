@@ -1,12 +1,12 @@
 export const site = {
-	name: "MOVIEBOXBD",
-	tagline: "Films & series, hand-picked.",
+	name: "CINEBOXBD",
+	tagline: "Watch something good tonight.",
 	description:
-		"MOVIEBOXBD is a carefully kept guide to what to watch next — real ratings, honest picks, nothing buried in noise.",
+		"Trending films and series with real ratings and genre rows that make sense. Pick something good tonight.",
 	nav: [
 		{ label: "Movies", href: "/movies" },
 		{ label: "TV Shows", href: "/tv" },
-		{ label: "Trending", href: "/search" },
+		{ label: "Trending", href: "/trending" },
 	],
 };
 
@@ -63,5 +63,5 @@ export const SORT_OPTIONS = [
 	{ value: "popularity", label: "Most popular" },
 	{ value: "rating", label: "Top rated" },
 	{ value: "newest", label: "Newest" },
-	{ value: "az", label: "A–Z" },
+	{ value: "az", label: "A-Z" },
 ];

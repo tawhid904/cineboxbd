@@ -102,7 +102,7 @@ export default function MobileNav() {
 			>
 				<div className="flex items-center justify-between border-b border-line px-6 pb-4 pt-[max(1.25rem,env(safe-area-inset-top))]">
 					<span className="font-display text-base tracking-tight text-ink">
-						MOVIEBOXBD
+						CINEBOXBD
 					</span>
 					<span className="font-mono text-[10px] uppercase tracking-[0.24em] text-accent">
 						Menu
@@ -159,7 +159,7 @@ export default function MobileNav() {
 					style={{ animationDelay: "0.26s" }}
 				>
 					<p className="font-mono text-[10px] uppercase tracking-[0.2em] text-faint">
-						Films &amp; series, hand-picked.
+						Watch something good tonight.
 					</p>
 				</div>
 			</div>

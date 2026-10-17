@@ -4,7 +4,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import { tmdbImage, SIZES } from "@/lib/images";
 
 /**
- * "Genres without boundaries" — collage cards built from real posters
+ * "Genres without boundaries" - collage cards built from real posters
  * of each genre (fetched server-side via TMDB Discover).
  */
 export default function GenreCollageSection({ collages }) {
@@ -14,7 +14,7 @@ export default function GenreCollageSection({ collages }) {
 		<section className="page-shell">
 			<SectionHeading
 				title="Genres without boundaries"
-				sub="Four starting points, hundreds of real titles — tap a genre and wander."
+				sub="Four starting points. Tap in and wander."
 			/>
 			<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 				{collages.map(({ genre, items }) => (

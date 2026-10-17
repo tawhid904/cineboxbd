@@ -6,11 +6,11 @@ export default function ApiKeyNotice() {
 					Setup required
 				</p>
 				<h1 className="mt-3 font-display text-2xl leading-tight md:text-3xl">
-					Add your API credentials to light up the site.
+					Add your API credentials to load the catalogue.
 				</h1>
 				<p className="mt-4 text-sm leading-relaxed text-muted">
-					MOVIEBOXBD renders live catalogue data — never placeholder content.
-					Until credentials are configured, this setup screen is shown instead.
+					Every title, poster and rating is fetched live.
+					Until credentials are set, this screen is all you&apos;ll see.
 				</p>
 				<ol className="mt-6 space-y-3 text-sm text-muted">
 					<li className="flex gap-3">
@@ -33,7 +33,7 @@ export default function ApiKeyNotice() {
 					</li>
 					<li className="flex gap-3">
 						<span className="font-mono text-accent">03</span>
-						<span>Restart the server — the site fills with real data.</span>
+						<span>Restart the server. The catalogue loads from there.</span>
 					</li>
 				</ol>
 			</div>

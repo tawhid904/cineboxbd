@@ -11,11 +11,11 @@ export default function ContinueWatchingRow() {
 	return (
 		<Carousel
 			title="Continue Watching"
-			sub="Picks up where you left off — stored on this device."
+			sub="Your last views, saved on this device."
 			items={items}
 			variant="continue"
-			viewAllHref="/search"
-			viewAllLabel="Recently viewed"
+			viewAllHref="/trending"
+			viewAllLabel="Trending now"
 		/>
 	);
 }

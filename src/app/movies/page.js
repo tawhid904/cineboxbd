@@ -5,9 +5,9 @@ import { BrowseSkeleton } from "@/components/ui/Skeleton";
 import { hasTmdbCredentials } from "@/lib/tmdb/client";
 
 export const metadata = {
-	title: "Browse movies",
+	title: "Movies",
 	description:
-		"Browse movies by genre, rating, release date or popularity — the full film catalogue, curated for MOVIEBOXBD.",
+		"Every film on the catalogue, filterable by genre, rating, release date and popularity.",
 };
 
 export default function MoviesPage({ searchParams }) {

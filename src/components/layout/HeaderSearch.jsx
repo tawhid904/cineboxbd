@@ -24,7 +24,7 @@ export default function HeaderSearch() {
 		const q = query.trim();
 		if (!q) return;
 		setOpen(false);
-		router.push(`/search?q=${encodeURIComponent(q)}`);
+		router.push(`/trending?q=${encodeURIComponent(q)}`);
 	};
 
 	return (
@@ -85,7 +85,7 @@ export default function HeaderSearch() {
 									</kbd>
 								</div>
 								<p className="px-1 pt-2.5 text-[11px] text-faint">
-									Search films, series and people — press Esc to close.
+									Enter to search, Esc to close.
 								</p>
 						</form>
 				</div>

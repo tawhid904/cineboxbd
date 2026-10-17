@@ -15,7 +15,7 @@ export default function Error({ error, reset }) {
 				<p className="mt-3 max-w-md font-mono text-xs text-faint">{error.message}</p>
 			) : (
 				<p className="mt-3 max-w-md text-sm text-muted">
-					The catalogue feed might be temporarily unreachable. Give it another go.
+					The catalogue didn&apos;t respond. Try again.
 				</p>
 			)}
 			<div className="mt-8 flex flex-wrap items-center justify-center gap-3">

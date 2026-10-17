@@ -13,7 +13,7 @@ export default function PosterCard({ item }) {
 	return (
 		<article className="group">
 			<Link href={href} className="block focus-visible:outline-offset-4">
-				<div className="relative aspect-[2/3] overflow-hidden rounded-lg bg-surface ring-1 ring-white/5">
+				<div className="relative aspect-2/3 overflow-hidden rounded-lg bg-surface ring-1 ring-white/5">
 					{poster ? (
 						<Image
 							src={poster}

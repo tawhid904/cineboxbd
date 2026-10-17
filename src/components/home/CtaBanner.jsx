@@ -19,7 +19,7 @@ function Phone({ src, className }) {
 	);
 }
 
-/** Closing CTA banner — real posters inside CSS phone mockups. */
+/** Closing CTA banner - real posters inside CSS phone mockups. */
 export default function CtaBanner({ posters }) {
 	const first = tmdbImage(posters?.[0], SIZES.poster);
 	const second = tmdbImage(posters?.[1], SIZES.posterLg);
@@ -37,16 +37,13 @@ export default function CtaBanner({ posters }) {
 
 					<div className="px-6 pb-10 md:px-0 md:pb-0">
 						<p className="mb-3 font-mono text-[11px] uppercase tracking-[0.24em] text-accent">
-							Why MOVIEBOXBD
+							Why CINEBOXBD
 						</p>
 						<h2 className="font-display text-[clamp(1.6rem,3.4vw,2.6rem)] leading-[1.05] text-ink">
 							Stories worth the late night.
 						</h2>
 						<p className="mt-4 max-w-md text-sm leading-relaxed text-muted md:text-[15px]">
-							Beyond the endless scroll — a catalogue organised like a good
-							video shop: honest ratings, real certifications, and genres that
-							actually mean something — refreshed continuously with what the
-							world is watching right now.
+							Real genre rows, real ratings, and one click from the trailer, cast and runtime. Find a film in a minute, not an hour.
 						</p>
 						<Link
 							href="/movies"

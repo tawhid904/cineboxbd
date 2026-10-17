@@ -4,6 +4,15 @@ const nextConfig = {
 		agentFeedback: true,
 	},
 	cacheComponents: true,
+	async redirects() {
+		return [
+			{
+				source: "/search",
+				destination: "/trending",
+				permanent: true,
+			},
+		];
+	},
 	partialPrefetching: true,
 	images: {
 		remotePatterns: [

@@ -2,7 +2,7 @@
 
 import { useState, useSyncExternalStore } from "react";
 
-const STORAGE_KEY = "movieboxbd:newsletter";
+const STORAGE_KEY = "cineboxbd:newsletter";
 
 function getSnapshot() {
 	try {
@@ -48,7 +48,7 @@ export default function NewsletterForm() {
 		return (
 			<p className="mt-4 rounded-lg border border-line bg-surface px-4 py-3 text-sm text-muted">
 				<span className="font-semibold text-ink">You&apos;re on the list.</span>{" "}
-				Saved on this device — look out for picks.
+				Saved on this device.
 			</p>
 		);
 	}
@@ -63,7 +63,7 @@ export default function NewsletterForm() {
 						setEmail(event.target.value);
 						if (status === "invalid") setLocalStatus("idle");
 					}}
-					placeholder="your@email.com"
+					placeholder="johndoe@gmail.com"
 					aria-label="Email address"
 					className="h-11 min-w-0 flex-1 bg-transparent px-4 text-sm text-ink outline-none placeholder:text-faint"
 				/>
@@ -80,7 +80,7 @@ export default function NewsletterForm() {
 				</p>
 			) : (
 				<p className="mt-2 text-[11px] text-faint">
-					No spam, no resale — stored on this device only.
+					Nothing leaves this device.
 				</p>
 			)}
 		</form>

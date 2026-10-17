@@ -1,6 +1,6 @@
 import Link from "next/link";
 import NewsletterForm from "./NewsletterForm";
-import { collageGenres, site } from "@/config/site";
+import { collageGenres } from "@/config/site";
 
 const columns = [
 	{
@@ -9,8 +9,7 @@ const columns = [
 			{ label: "Home", href: "/" },
 			{ label: "Movies", href: "/movies" },
 			{ label: "TV Shows", href: "/tv" },
-			{ label: "Trending", href: "/search" },
-			{ label: "Search", href: "/search" },
+			{ label: "Trending", href: "/trending" },
 		],
 	},
 	{
@@ -28,11 +27,10 @@ export default function SiteFooter() {
 			<div className="page-shell grid gap-10 py-14 md:grid-cols-[1.5fr_1fr_1fr] md:gap-8">
 				<div>
 					<h3 className="font-display text-lg text-ink">
-						Stay in {site.name === "MOVIEBOXBD" ? "the loop" : "the box"}.
+						Join the list.
 					</h3>
 					<p className="mt-2 max-w-sm text-sm leading-relaxed text-muted">
-						New releases, festival picks, and the odd hidden gem — curated
-						here, sent honestly.
+						New releases, festival picks, hidden gems. Saved on this device for now.
 					</p>
 					<NewsletterForm />
 				</div>
@@ -68,8 +66,8 @@ export default function SiteFooter() {
 			</div>
 
 			<div className="overflow-hidden px-2 pb-4" aria-hidden="true">
-				<p className="select-none whitespace-nowrap text-center font-display leading-[0.78] tracking-[-0.03em] text-ink/95" style={{ fontSize: "clamp(2.75rem, 12.6vw, 14rem)" }}>
-					MOVIEBOXBD
+				<p className="select-none whitespace-nowrap text-center font-display leading-[0.78] tracking-[-0.03em] text-ink/95" style={{ fontSize: "clamp(2.75rem, 14vw, 15rem)" }}>
+					CINEBOXBD
 				</p>
 			</div>
 		</footer>

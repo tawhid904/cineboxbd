@@ -50,7 +50,7 @@ export default function ExploreBar({ genres }) {
 	const submit = (event) => {
 		event.preventDefault();
 		const q = query.trim();
-		router.push(q ? `/search?q=${encodeURIComponent(q)}` : "/search");
+		router.push(q ? `/trending?q=${encodeURIComponent(q)}` : "/trending");
 	};
 
 	return (
@@ -64,9 +64,7 @@ export default function ExploreBar({ genres }) {
 						Films curated for you
 					</h2>
 					<p className="mt-2 text-sm leading-relaxed text-muted">
-						Discover new stories, hidden gems, and unforgettable
-						experiences — organised so you can find the right film in
-						seconds.
+						Pick by genre, search by name, or scroll until something grabs you.
 					</p>
 				</div>
 
