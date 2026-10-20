@@ -43,23 +43,40 @@ export async function generateMetadata({ params }) {
 	const { id } = await params;
 	const numericId = Number(id);
 	if (!hasTmdbCredentials() || !Number.isInteger(numericId)) {
-		return { title: "TV show" };
+		return { title: 'TV Show' };
 	}
 	try {
 		const details = await getTvDetails(numericId);
+		const overview = details.overview?.slice(0, 160) || 'TV show details on CineboxBD.';
+		const backdropUrl = details.backdrop_path
+			? `https://image.tmdb.org/t/p/w1280${details.backdrop_path}`
+			: '/preview.png';
 		return {
 			title: details.name,
-			description: details.overview?.slice(0, 180) || undefined,
+			description: overview,
+			keywords: [
+				`watch ${details.name} online`,
+				`${details.name} series`,
+				`${details.name} Bangladesh`,
+				'watch TV series online Bangladesh',
+			],
+			alternates: { canonical: `/tv/${numericId}` },
 			openGraph: {
-				title: details.name,
-				description: details.overview?.slice(0, 180) || undefined,
-				images: details.backdrop_path
-					? [`https://image.tmdb.org/t/p/w1280${details.backdrop_path}`]
-					: undefined,
+				title: `${details.name} | CineboxBD`,
+				description: overview,
+				url: `https://www.cineboxbd.bond/tv/${numericId}`,
+				images: [{ url: backdropUrl, width: 1280, height: 720, alt: details.name }],
+				type: 'video.tv_show',
+			},
+			twitter: {
+				card: 'summary_large_image',
+				title: `${details.name} | CineboxBD`,
+				description: overview,
+				images: [backdropUrl],
 			},
 		};
 	} catch {
-		return { title: "TV show" };
+		return { title: 'TV Show', description: 'TV show details on CineboxBD.' };
 	}
 }
 
@@ -96,8 +113,50 @@ async function TvDetailContent({ params }) {
 		{ label: "Episodes", value: item.episodes },
 	];
 
+	const tvSchema = {
+		'@context': 'https://schema.org',
+		'@type': 'TVSeries',
+		name: details.name,
+		description: details.overview,
+		image: details.poster_path
+			? `https://image.tmdb.org/t/p/w500${details.poster_path}`
+			: undefined,
+		datePublished: details.first_air_date,
+		numberOfSeasons: details.number_of_seasons,
+		numberOfEpisodes: details.number_of_episodes,
+		genre: details.genres?.map((g) => g.name),
+		aggregateRating: details.vote_count > 0
+			? {
+					'@type': 'AggregateRating',
+					ratingValue: details.vote_average.toFixed(1),
+					bestRating: '10',
+					worstRating: '0',
+					ratingCount: details.vote_count,
+			  }
+			: undefined,
+		url: `https://www.cineboxbd.bond/tv/${details.id}`,
+	};
+
+	const breadcrumbSchema = {
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.cineboxbd.bond' },
+			{ '@type': 'ListItem', position: 2, name: 'TV Shows', item: 'https://www.cineboxbd.bond/tv' },
+			{ '@type': 'ListItem', position: 3, name: details.name, item: `https://www.cineboxbd.bond/tv/${details.id}` },
+		],
+	};
+
 	return (
 		<>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(tvSchema) }}
+			/>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+			/>
 			<DetailHero item={item} director={crew.director} providers={providers} />
 
 			<div className="page-shell space-y-14 pb-24 pt-10 md:pt-14">

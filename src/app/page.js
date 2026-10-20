@@ -18,8 +18,22 @@ import { normalizeCard, normalizeHero } from "@/lib/tmdb/normalize";
 import { collageGenres, homeGenreRows, homeTvRow } from "@/config/site";
 
 export const metadata = {
-	description:
-		"Trending films and series with real ratings and genre rows that make sense. Pick something good tonight.",
+	title: 'CineboxBD | Watch Movies & Series Online Bangladesh',
+	description: 'Discover trending movies and top-rated TV series on CineboxBD. Browse by genre, rating, and release date. Your ultimate movie discovery site in Bangladesh.',
+	keywords: ['watch movies online Bangladesh', 'movies online BD', 'trending movies', 'best series to watch'],
+	alternates: { canonical: '/' },
+	openGraph: {
+		title: 'CineboxBD | Watch Movies & Series Online Bangladesh',
+		description: 'Discover trending movies and top-rated TV series on CineboxBD.',
+		url: 'https://www.cineboxbd.bond',
+		images: [{ url: '/preview.png', width: 1200, height: 630 }],
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: 'CineboxBD | Watch Movies & Series Online Bangladesh',
+		description: 'Discover trending movies and top-rated TV series on CineboxBD.',
+		images: ['/preview.png'],
+	},
 };
 
 export default async function HomePage() {
@@ -66,6 +80,26 @@ export default async function HomePage() {
 
 	return (
 		<>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify({
+						'@context': 'https://schema.org',
+						'@type': 'WebSite',
+						name: 'CineboxBD',
+						url: 'https://www.cineboxbd.bond',
+						description: 'Discover trending movies and top-rated TV series in Bangladesh.',
+						potentialAction: {
+							'@type': 'SearchAction',
+							target: {
+								'@type': 'EntryPoint',
+								urlTemplate: 'https://www.cineboxbd.bond/trending?q={search_term_string}',
+							},
+							'query-input': 'required name=search_term_string',
+						},
+					}),
+				}}
+			/>
 			<NowWatchingHero slides={slides} />
 
 			<div className="space-y-16 pb-24 pt-14 md:space-y-24 md:pt-20">

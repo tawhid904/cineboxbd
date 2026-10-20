@@ -9,9 +9,22 @@ import { getGenreMap, getTrending, searchMulti } from "@/lib/tmdb/endpoints";
 import { normalizeCard } from "@/lib/tmdb/normalize";
 
 export const metadata = {
-	title: "Trending",
-	description:
-		"Trending today, plus search across the whole catalogue.",
+	title: 'Trending',
+	description: "See what movies and TV shows are trending right now in Bangladesh. Search CineboxBD's full catalogue of films and series.",
+	keywords: ['trending movies Bangladesh', 'most popular movies right now', 'trending series this week', 'movie search online'],
+	alternates: { canonical: '/trending' },
+	openGraph: {
+		title: 'Trending Now | CineboxBD',
+		description: "See what's trending in movies and TV today. Search the full catalogue.",
+		url: 'https://www.cineboxbd.bond/trending',
+		images: [{ url: '/preview.png', width: 1200, height: 630 }],
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: 'Trending Now | CineboxBD',
+		description: "See what's trending in movies and TV today.",
+		images: ['/preview.png'],
+	},
 };
 
 function SearchContent({ searchParams }) {

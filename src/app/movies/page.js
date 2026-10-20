@@ -5,9 +5,22 @@ import { BrowseSkeleton } from "@/components/ui/Skeleton";
 import { hasTmdbCredentials } from "@/lib/tmdb/client";
 
 export const metadata = {
-	title: "Movies",
-	description:
-		"Every film on the catalogue, filterable by genre, rating, release date and popularity.",
+	title: 'Movies',
+	description: 'Browse and discover the latest movies online. Filter by genre, rating, release year, and popularity. Find your next favourite film on CineboxBD Bangladesh.',
+	keywords: ['latest movies online BD', 'browse movies by genre', 'top rated movies', 'new movie releases Bangladesh'],
+	alternates: { canonical: '/movies' },
+	openGraph: {
+		title: 'Browse Movies | CineboxBD',
+		description: 'Browse and filter movies by genre, rating and release date.',
+		url: 'https://www.cineboxbd.bond/movies',
+		images: [{ url: '/preview.png', width: 1200, height: 630 }],
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: 'Browse Movies | CineboxBD',
+		description: 'Browse and filter movies by genre, rating and release date.',
+		images: ['/preview.png'],
+	},
 };
 
 export default function MoviesPage({ searchParams }) {
