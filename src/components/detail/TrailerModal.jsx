@@ -18,14 +18,14 @@ export default function TrailerModal({ videoKey, title, onClose }) {
 
 	return (
 		<div
-			className="fixed inset-0 z-[70] flex animate-fade-in items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+			className="fixed inset-0 z-70 flex animate-fade-in items-center justify-center bg-black/85 p-4 backdrop-blur-sm cursor-crosshair"
 			onClick={onClose}
 			role="dialog"
 			aria-modal="true"
 			aria-label={title || "Trailer"}
 		>
 			<div
-				className="w-full max-w-4xl"
+				className="w-full max-w-4xl cursor-default"
 				onClick={(event) => event.stopPropagation()}
 			>
 				<div className="mb-3 flex items-center justify-between gap-4">
@@ -34,7 +34,7 @@ export default function TrailerModal({ videoKey, title, onClose }) {
 						type="button"
 						onClick={onClose}
 						aria-label="Close trailer"
-						className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line bg-surface text-muted transition hover:border-accent hover:text-ink"
+						className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-line bg-surface text-muted transition hover:border-accent hover:text-ink"
 					>
 						<svg
 							viewBox="0 0 20 20"

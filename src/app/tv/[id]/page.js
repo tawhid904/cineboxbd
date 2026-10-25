@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import ApiKeyNotice from "@/components/ui/ApiKeyNotice";
-import { DetailSkeleton } from "@/components/ui/Skeleton";
+import MovieDetailSkeleton from "@/components/ui/skeletons/MovieDetailSkeleton";
 import DetailHero from "@/components/detail/DetailHero";
 import FactsGrid, { buildFacts } from "@/components/detail/FactsGrid";
 import CastRow from "@/components/detail/CastRow";
@@ -86,7 +86,7 @@ export default function TvDetailPage({ params }) {
 	// `params` is URL data - keep the read inside Suspense so navigation can
 	// paint the shared shell + skeleton instantly (instant-shell rule).
 	return (
-		<Suspense fallback={<DetailSkeleton />}>
+		<Suspense fallback={<MovieDetailSkeleton />}>
 			<TvDetailContent params={params} />
 		</Suspense>
 	);

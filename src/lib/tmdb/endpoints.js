@@ -34,6 +34,14 @@ export function getTopRatedMovies(page = 1) {
 	});
 }
 
+export function getUpcomingMovies(page = 1) {
+	return tmdbFetch("/movie/upcoming", {
+		params: { page },
+		life: "hours",
+		tag: `movie:upcoming:${page}`,
+	});
+}
+
 export function getPopularTv(page = 1) {
 	return tmdbFetch("/tv/popular", {
 		params: { page },

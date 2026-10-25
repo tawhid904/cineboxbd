@@ -15,13 +15,13 @@ export default function NotFound() {
 			<div className="mt-8 flex flex-wrap items-center justify-center gap-3">
 				<Link
 					href="/"
-					className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:bg-accent-hover"
+					className="cursor-pointer rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:bg-accent-hover"
 				>
 					Back home
 				</Link>
 				<Link
 					href="/trending"
-					className="rounded-full border border-line bg-surface px-6 py-3 text-sm font-semibold text-ink transition hover:border-accent"
+					className="cursor-pointer rounded-full border border-line bg-surface px-6 py-3 text-sm font-semibold text-ink transition hover:border-accent"
 				>
 					Browse trending
 				</Link>

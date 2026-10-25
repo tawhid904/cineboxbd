@@ -22,13 +22,13 @@ export default function Error({ error, reset }) {
 				<button
 					type="button"
 					onClick={reset}
-					className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:bg-accent-hover"
+					className="cursor-pointer rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:bg-accent-hover"
 				>
 					Try again
 				</button>
 				<Link
 					href="/"
-					className="rounded-full border border-line bg-surface px-6 py-3 text-sm font-semibold text-ink transition hover:border-accent"
+					className="cursor-pointer rounded-full border border-line bg-surface px-6 py-3 text-sm font-semibold text-ink transition hover:border-accent"
 				>
 					Back home
 				</Link>

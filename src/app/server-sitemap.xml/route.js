@@ -10,7 +10,7 @@ export async function GET() {
   const now = new Date().toISOString()
   const urls = [
     ...(moviesData.results || []).map((m) => ({
-      loc: `https://www.cineboxbd.bond/movie/${m.id}`,
+      loc: `https://www.cineboxbd.bond/movies/${m.id}`,
       lastmod: now,
       changefreq: 'weekly',
       priority: 0.8,

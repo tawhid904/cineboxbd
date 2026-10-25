@@ -1,18 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
+import MediaBadge from "@/components/ui/MediaBadge";
 import { tmdbImage, SIZES } from "@/lib/images";
 import { formatVote, formatYear } from "@/lib/format";
 
-export default function PosterCard({ item }) {
+export default function PosterCard({ item, badge, variant }) {
 	if (!item) return null;
-	const href = `/${item.mediaType}/${item.id}`;
+	const href = `/${item.mediaType === "movie" ? "movies" : item.mediaType}/${item.id}`;
 	const poster = tmdbImage(item.posterPath, SIZES.poster);
 	const vote = formatVote(item.voteAverage);
 	const year = formatYear(item.year) || item.year;
+	const resolvedVariant = variant || item.variant || badge || item.badge || null;
 
 	return (
 		<article className="group">
-			<Link href={href} className="block focus-visible:outline-offset-4">
+			<Link href={href} className="block cursor-pointer focus-visible:outline-offset-4">
 				<div className="relative aspect-2/3 overflow-hidden rounded-lg bg-surface ring-1 ring-white/5">
 					{poster ? (
 						<Image
@@ -28,8 +30,14 @@ export default function PosterCard({ item }) {
 							View details
 						</span>
 					</div>
+					{/* MediaBadge chip — top-left */}
+					{resolvedVariant && (
+						<div className="absolute top-2 left-2 z-10">
+							<MediaBadge variant={resolvedVariant} />
+						</div>
+					)}
 					{vote ? (
-						<span className="absolute left-2 top-2 rounded bg-black/75 px-1.5 py-0.5 font-mono text-[10px] text-star backdrop-blur-sm">
+						<span className={`absolute ${resolvedVariant ? "right-2" : "left-2"} top-2 rounded bg-black/75 px-1.5 py-0.5 font-mono text-[10px] text-star backdrop-blur-sm z-10`}>
 							★ {vote}
 						</span>
 					) : null}

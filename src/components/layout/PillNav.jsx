@@ -23,7 +23,7 @@ export default function PillNav() {
 						href={link.href}
 						aria-current={active ? "page" : undefined}
 						className={cn(
-							"rounded-full px-4 py-1.5 text-sm transition",
+							"cursor-pointer rounded-full px-4 py-1.5 text-sm transition",
 							active
 								? "bg-ink font-semibold text-bg"
 								: "text-muted hover:text-ink",

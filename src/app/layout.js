@@ -1,6 +1,8 @@
 import SiteFooter from "@/components/layout/SiteFooter";
 import SiteHeader from "@/components/layout/SiteHeader";
+import AppSkeletonTheme from "@/components/ui/AppSkeletonTheme";
 import { Archivo, Archivo_Black, Geist_Mono } from "next/font/google";
+import "react-loading-skeleton/dist/skeleton.css";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -93,7 +95,9 @@ export default function RootLayout({ children }) {
 				/>
 				<SiteHeader />
 				<main id="main" className="flex-1">
-					{children}
+					<AppSkeletonTheme>
+						{children}
+					</AppSkeletonTheme>
 				</main>
 				<SiteFooter />
 			</body>

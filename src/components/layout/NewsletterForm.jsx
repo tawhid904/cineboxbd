@@ -69,7 +69,7 @@ export default function NewsletterForm() {
 				/>
 				<button
 					type="submit"
-					className="h-11 shrink-0 bg-accent px-5 text-sm font-semibold text-white transition hover:bg-accent-hover"
+					className="h-11 shrink-0 cursor-pointer bg-accent px-5 text-sm font-semibold text-white transition hover:bg-accent-hover"
 				>
 					Subscribe
 				</button>

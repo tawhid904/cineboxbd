@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import ApiKeyNotice from "@/components/ui/ApiKeyNotice";
-import { DetailSkeleton } from "@/components/ui/Skeleton";
+import MovieDetailSkeleton from "@/components/ui/skeletons/MovieDetailSkeleton";
 import DetailHero from "@/components/detail/DetailHero";
 import FactsGrid, { buildFacts } from "@/components/detail/FactsGrid";
 import CastRow from "@/components/detail/CastRow";
@@ -60,11 +60,11 @@ export async function generateMetadata({ params }) {
 				`${details.title} Bangladesh`,
 				'movies online BD',
 			],
-			alternates: { canonical: `/movie/${numericId}` },
+			alternates: { canonical: `/movies/${numericId}` },
 			openGraph: {
 				title: `${details.title} | CineboxBD`,
 				description: overview,
-				url: `https://www.cineboxbd.bond/movie/${numericId}`,
+				url: `https://www.cineboxbd.bond/movies/${numericId}`,
 				images: [{ url: backdropUrl, width: 1280, height: 720, alt: details.title }],
 				type: 'video.movie',
 			},
@@ -86,7 +86,7 @@ export default function MovieDetailPage({ params }) {
 	// `params` is URL data - keep the read inside Suspense so navigation can
 	// paint the shared shell + skeleton instantly (instant-shell rule).
 	return (
-		<Suspense fallback={<DetailSkeleton />}>
+		<Suspense fallback={<MovieDetailSkeleton />}>
 			<MovieDetailContent params={params} />
 		</Suspense>
 	);
@@ -128,7 +128,7 @@ async function MovieDetailContent({ params }) {
 					ratingCount: details.vote_count,
 			  }
 			: undefined,
-		url: `https://www.cineboxbd.bond/movie/${details.id}`,
+		url: `https://www.cineboxbd.bond/movies/${details.id}`,
 	};
 
 	const breadcrumbSchema = {
@@ -137,7 +137,7 @@ async function MovieDetailContent({ params }) {
 		itemListElement: [
 			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.cineboxbd.bond' },
 			{ '@type': 'ListItem', position: 2, name: 'Movies', item: 'https://www.cineboxbd.bond/movies' },
-			{ '@type': 'ListItem', position: 3, name: details.title, item: `https://www.cineboxbd.bond/movie/${details.id}` },
+			{ '@type': 'ListItem', position: 3, name: details.title, item: `https://www.cineboxbd.bond/movies/${details.id}` },
 		],
 	};
 
@@ -176,6 +176,7 @@ async function MovieDetailContent({ params }) {
 								? `/movies?genre=${item.genreIds[0]}`
 								: "/movies"
 						}
+						viewAllLabel="See all"
 					/>
 				) : null}
 			</div>

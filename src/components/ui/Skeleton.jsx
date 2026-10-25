@@ -1,139 +1,71 @@
-import { cn } from "@/lib/cn";
+"use client";
 
-export function Skeleton({ className }) {
-	return (
-		<div
-			className={cn("animate-pulse rounded-lg bg-surface", className)}
-			aria-hidden="true"
-		/>
-	);
+import BaseSkeleton from "react-loading-skeleton";
+import MovieCardSkeleton from "@/components/ui/skeletons/MovieCardSkeleton";
+import HeroCarouselSkeleton from "@/components/ui/skeletons/HeroCarouselSkeleton";
+import MovieDetailSkeleton from "@/components/ui/skeletons/MovieDetailSkeleton";
+
+export { default as MovieCardSkeleton } from "@/components/ui/skeletons/MovieCardSkeleton";
+export { default as HeroCarouselSkeleton } from "@/components/ui/skeletons/HeroCarouselSkeleton";
+export { default as MovieDetailSkeleton } from "@/components/ui/skeletons/MovieDetailSkeleton";
+
+export function Skeleton(props) {
+	return <BaseSkeleton {...props} />;
 }
 
-export function CardSkeleton({ variant = "card" }) {
-	if (variant === "poster") {
-		return (
-			<div className="space-y-2">
-				<Skeleton className="aspect-[2/3] w-full rounded-lg" />
-				<Skeleton className="h-4 w-3/4" />
-				<Skeleton className="h-3 w-1/2" />
-			</div>
-		);
-	}
-	return (
-		<div className="w-[260px] shrink-0 space-y-2 sm:w-[300px] lg:w-[336px]">
-			<Skeleton className="aspect-video w-full rounded-xl" />
-			<Skeleton className="h-4 w-2/3" />
-			<Skeleton className="h-3 w-1/2" />
-		</div>
-	);
+export function CardSkeleton({ count = 1, variant = "poster" }) {
+	return <MovieCardSkeleton count={count} variant={variant} />;
 }
 
 export function RowSkeleton() {
 	return (
-		<div className="no-scrollbar flex gap-4 overflow-hidden">
-			{Array.from({ length: 5 }, (_, i) => (
-				<CardSkeleton key={i} />
-			))}
+		<div className="no-scrollbar flex gap-4 overflow-hidden cursor-loading pb-1">
+			<MovieCardSkeleton count={5} variant="card" />
 		</div>
 	);
 }
 
 export function BrowseSkeleton() {
 	return (
-		<div className="page-shell py-14">
-			<div className="mb-8 space-y-3">
-				<Skeleton className="h-4 w-24" />
-				<Skeleton className="h-9 w-72" />
-				<Skeleton className="h-4 w-96 max-w-full" />
+		<div className="page-shell cursor-loading py-10 md:py-14">
+			<header className="mb-8 max-w-2xl">
+				<div className="mb-2">
+					<BaseSkeleton width={70} height={13} borderRadius="0.25rem" />
+				</div>
+				<BaseSkeleton height={42} width={260} borderRadius="0.5rem" />
+				<div className="mt-2">
+					<BaseSkeleton
+						height={16}
+						width={380}
+						borderRadius="0.25rem"
+						className="max-w-full"
+					/>
+				</div>
+			</header>
+
+			{/* Filter toolbar skeleton */}
+			<div className="mb-8 flex flex-wrap items-center justify-between gap-4">
+				<div className="flex flex-wrap items-center gap-2.5">
+					<BaseSkeleton width={200} height={40} borderRadius="9999px" />
+					<BaseSkeleton width={110} height={40} borderRadius="9999px" />
+					<BaseSkeleton width={130} height={40} borderRadius="9999px" />
+					<BaseSkeleton width={80} height={40} borderRadius="9999px" />
+				</div>
+				<BaseSkeleton width={70} height={16} borderRadius="0.25rem" />
 			</div>
-			<div className="mb-8 flex gap-3">
-				<Skeleton className="h-10 w-56 rounded-full" />
-				<Skeleton className="h-10 w-36 rounded-full" />
-				<Skeleton className="h-10 w-36 rounded-full" />
-			</div>
-			<div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-				{Array.from({ length: 10 }, (_, i) => (
-					<CardSkeleton key={i} variant="poster" />
-				))}
+
+			{/* Poster Grid */}
+			<div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-5">
+				<MovieCardSkeleton count={10} variant="poster" />
 			</div>
 		</div>
 	);
 }
 
 export function HeroSkeleton() {
-	return (
-		<div className="relative h-[clamp(480px,80vh,760px)] w-full bg-surface">
-			<div className="absolute inset-0 scrim-hero" />
-			<div className="page-shell relative flex h-full flex-col justify-end pb-16">
-				<div className="max-w-2xl space-y-4">
-					<Skeleton className="h-4 w-32" />
-					<Skeleton className="h-14 w-3/4" />
-					<Skeleton className="h-4 w-full" />
-					<Skeleton className="h-4 w-5/6" />
-					<div className="flex gap-3 pt-2">
-						<Skeleton className="h-11 w-40 rounded-full" />
-						<Skeleton className="h-11 w-32 rounded-full" />
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+	return <HeroCarouselSkeleton />;
 }
 
-/**
- * Detail-page placeholder shown instantly while `params`-driven content
- * streams in behind a Suspense boundary (instant-shell requirement).
- * Mirrors the real layout so the swap doesn't shift the page.
- */
 export function DetailSkeleton() {
-	return (
-		<div aria-busy="true" aria-label="Loading details">
-			<section className="relative">
-				<div
-					className="absolute inset-x-0 top-0 h-[clamp(340px,52vh,540px)] bg-surface"
-					aria-hidden="true"
-				>
-					<div className="scrim-hero absolute inset-0" />
-				</div>
-				<div className="page-shell relative pb-12 pt-10 md:pt-16">
-					<div className="flex flex-col gap-7 md:flex-row md:items-end md:gap-9">
-						<Skeleton className="aspect-[2/3] w-36 shrink-0 rounded-xl md:w-52" />
-						<div className="w-full max-w-2xl space-y-4">
-							<div className="flex gap-3">
-								<Skeleton className="h-4 w-10" />
-								<Skeleton className="h-4 w-36" />
-								<Skeleton className="h-4 w-20" />
-							</div>
-							<Skeleton className="h-10 w-3/4 md:h-12" />
-							<Skeleton className="h-4 w-1/2" />
-							<Skeleton className="h-4 w-full" />
-							<Skeleton className="h-4 w-5/6" />
-							<div className="flex gap-3 pt-2">
-								<Skeleton className="h-11 w-40 rounded-full" />
-								<Skeleton className="h-11 w-32 rounded-full" />
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<div className="page-shell space-y-14 pb-24 pt-10 md:pt-14">
-				<div className="space-y-4">
-					<Skeleton className="h-7 w-28" />
-					<div className="grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
-						{Array.from({ length: 6 }, (_, i) => (
-							<div key={i} className="space-y-2 border-b border-line pb-3">
-								<Skeleton className="h-3 w-24" />
-								<Skeleton className="h-4 w-36" />
-							</div>
-						))}
-					</div>
-				</div>
-				<div className="space-y-4">
-					<Skeleton className="h-7 w-24" />
-					<RowSkeleton />
-				</div>
-			</div>
-		</div>
-	);
+	return <MovieDetailSkeleton />;
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -133,20 +134,20 @@ export default function ExploreBar({ genres }) {
 						role="group"
 						aria-label="View layout"
 					>
-						<a
+						<Link
 							href="/movies?view=grid"
 							aria-label="Grid view"
-							className="flex h-8 w-8 items-center justify-center rounded-full text-muted transition hover:bg-surface-hover hover:text-ink"
+							className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-muted transition hover:bg-surface-hover hover:text-ink"
 						>
 							<GridIcon />
-						</a>
-						<a
+						</Link>
+						<Link
 							href="/movies?view=list"
 							aria-label="List view"
-							className="flex h-8 w-8 items-center justify-center rounded-full text-muted transition hover:bg-surface-hover hover:text-ink"
+							className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-muted transition hover:bg-surface-hover hover:text-ink"
 						>
 							<ListIcon />
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>

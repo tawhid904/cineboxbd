@@ -49,7 +49,7 @@ export default function SiteFooter() {
 										{...(link.external
 											? { target: "_blank", rel: "noreferrer" }
 											: {})}
-										className="text-sm text-muted transition hover:text-ink"
+										className="cursor-pointer text-sm text-muted transition hover:text-ink"
 									>
 										{link.label}
 									</Link>

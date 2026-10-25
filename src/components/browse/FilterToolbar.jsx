@@ -117,7 +117,7 @@ export default function FilterToolbar({ mediaType, genres, values }) {
 					onClick={() => go({ view: "grid" })}
 					aria-label="Grid view"
 					aria-pressed={values.view !== "list"}
-					className={`flex h-8 w-8 items-center justify-center rounded-full transition ${
+					className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-full transition ${
 						values.view !== "list"
 							? "bg-ink text-bg"
 							: "text-muted hover:text-ink"
@@ -135,7 +135,7 @@ export default function FilterToolbar({ mediaType, genres, values }) {
 					onClick={() => go({ view: "list" })}
 					aria-label="List view"
 					aria-pressed={values.view === "list"}
-					className={`flex h-8 w-8 items-center justify-center rounded-full transition ${
+					className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-full transition ${
 						values.view === "list"
 							? "bg-ink text-bg"
 							: "text-muted hover:text-ink"
@@ -156,7 +156,7 @@ export default function FilterToolbar({ mediaType, genres, values }) {
 						setQuery("");
 						router.push(base);
 					}}
-					className="h-10 rounded-full px-3 text-xs text-faint underline decoration-line underline-offset-4 transition hover:text-accent hover:decoration-accent"
+					className="h-10 cursor-pointer rounded-full px-3 text-xs text-faint underline decoration-line underline-offset-4 transition hover:text-accent hover:decoration-accent"
 				>
 					Clear filters
 				</button>

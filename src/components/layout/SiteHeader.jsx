@@ -30,7 +30,7 @@ export default function SiteHeader() {
 				<Link
 					href="/"
 					aria-label="CINEBOXBD home"
-					className="group relative z-30 inline-flex shrink-0 items-center"
+					className="group relative z-30 inline-flex cursor-pointer shrink-0 items-center"
 				>
 					<Logo priority className="aspect-[819/106] h-6 w-auto md:h-7" />
 				</Link>

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import MediaCard from "./MediaCard";
 import ContinueCard from "./ContinueCard";
+import MovieCardSkeleton from "@/components/ui/skeletons/MovieCardSkeleton";
 import { cn } from "@/lib/cn";
 
 function ControlButton({ dir, label, onClick }) {
@@ -12,7 +13,7 @@ function ControlButton({ dir, label, onClick }) {
 			type="button"
 			onClick={onClick}
 			aria-label={label}
-			className="flex h-9 w-9 items-center justify-center rounded-full border border-line bg-surface text-muted transition hover:border-accent hover:text-ink"
+			className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-line bg-surface text-muted transition hover:border-accent hover:text-ink"
 		>
 			<svg viewBox="0 0 20 20" className="h-4 w-4 fill-current" aria-hidden="true">
 				{dir === "prev" ? (
@@ -35,12 +36,32 @@ export default function Carousel({
 	items,
 	variant = "card",
 	viewAllHref,
-	viewAllLabel = "View all",
+	viewAllLabel = "See all",
 	ariaLabel,
 	className,
 	id,
+	isLoading = false,
 }) {
 	const scrollerRef = useRef(null);
+	if (isLoading) {
+		return (
+			<section className={cn("page-shell cursor-loading", className)} id={id}>
+				<div className="mb-4 flex items-end justify-between gap-4">
+					<div className="min-w-0">
+						<h2 className="text-2xl font-bold leading-tight text-ink">
+							{title}
+						</h2>
+						{sub ? (
+							<p className="mt-1.5 max-w-xl text-sm text-muted">{sub}</p>
+						) : null}
+					</div>
+				</div>
+				<div className="no-scrollbar flex gap-4 overflow-x-auto pb-1">
+					<MovieCardSkeleton count={5} variant="card" />
+				</div>
+			</section>
+		);
+	}
 	if (!items?.length) return null;
 
 	const scrollByDir = (dir) => {
@@ -54,22 +75,25 @@ export default function Carousel({
 
 	return (
 		<section className={cn("page-shell", className)} id={id}>
-			<div className="mb-4 flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
+			<div className="mb-4 flex items-end justify-between gap-4">
 				<div className="min-w-0">
-					<h2 className="font-display text-[clamp(1.3rem,2.4vw,1.9rem)] leading-tight text-ink">
+					<h2 className="text-2xl font-bold leading-tight text-ink">
 						{title}
 					</h2>
 					{sub ? (
 						<p className="mt-1.5 max-w-xl text-sm text-muted">{sub}</p>
 					) : null}
 				</div>
-				<div className="flex items-center gap-2">
+				<div className="flex shrink-0 items-center gap-3">
 					{viewAllHref ? (
 						<Link
 							href={viewAllHref}
-							className="mr-1 hidden text-sm text-muted underline decoration-line underline-offset-4 transition hover:text-ink hover:decoration-accent sm:inline"
+							className="inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-accent transition hover:text-accent-hover"
 						>
-							{viewAllLabel}
+							<span>{viewAllLabel}</span>
+							<svg viewBox="0 0 20 20" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
+								<path d="M7.5 4.5L13 10l-5.5 5.5.9.9 6.4-6.4-6.4-6.4z" />
+							</svg>
 						</Link>
 					) : null}
 					<div className="hidden gap-2 md:flex">
@@ -97,7 +121,7 @@ export default function Carousel({
 						{variant === "continue" ? (
 							<ContinueCard item={item} />
 						) : (
-							<MediaCard item={item} />
+							<MediaCard item={item} badge={item.badge} variant={item.variant} />
 						)}
 					</div>
 				))}

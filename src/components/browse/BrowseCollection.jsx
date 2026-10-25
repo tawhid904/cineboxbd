@@ -7,6 +7,7 @@ import {
 } from "@/lib/tmdb/endpoints";
 import { normalizeCard } from "@/lib/tmdb/normalize";
 import { SORTS } from "@/config/site";
+import { determineMediaVariant } from "@/lib/badges";
 import FilterToolbar from "./FilterToolbar";
 import Pagination from "./Pagination";
 import PosterCard from "@/components/media/PosterCard";
@@ -50,7 +51,16 @@ export default async function BrowseCollection({ mediaType, searchParams }) {
 			});
 
 	const cards = data.results
-		.map((result) => normalizeCard(result, mediaType, { [mediaType]: genreNameMap }))
+		.map((result) => {
+			const card = normalizeCard(result, mediaType, { [mediaType]: genreNameMap });
+			if (!card) return null;
+			const variant = determineMediaVariant({
+				releaseDate: card.releaseDate,
+				sort: values.sort,
+				isSearch: Boolean(values.q),
+			});
+			return { ...card, variant };
+		})
 		.filter(Boolean);
 
 	const makeHref = (page) => {
@@ -102,13 +112,21 @@ export default async function BrowseCollection({ mediaType, searchParams }) {
 			) : values.view === "list" ? (
 				<div className="space-y-4">
 					{cards.map((card) => (
-						<ListCard key={card.id} item={card} />
+						<ListCard
+							key={card.id}
+							item={card}
+							variant={card.variant}
+						/>
 					))}
 				</div>
 			) : (
 				<div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-5">
 					{cards.map((card) => (
-						<PosterCard key={card.id} item={card} />
+						<PosterCard
+							key={card.id}
+							item={card}
+							variant={card.variant}
+						/>
 					))}
 				</div>
 			)}

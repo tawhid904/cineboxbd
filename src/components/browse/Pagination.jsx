@@ -9,7 +9,7 @@ export default function Pagination({ page, totalPages, makeHref }) {
 
 	const edge = "pointer-events-none opacity-35";
 	const baseCls =
-		"inline-flex h-10 items-center gap-2 rounded-full border border-line bg-surface px-5 text-sm transition";
+		"inline-flex h-10 cursor-pointer items-center gap-2 rounded-full border border-line bg-surface px-5 text-sm transition hover:border-accent hover:text-ink";
 
 	return (
 		<nav

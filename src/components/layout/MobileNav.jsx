@@ -45,7 +45,7 @@ export default function MobileNav() {
 				aria-controls="mobile-drawer"
 				aria-label={open ? "Close menu" : "Open menu"}
 				className={cn(
-					"flex h-10 w-10 items-center justify-center rounded-full border transition-colors duration-300",
+					"flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border transition-colors duration-300",
 					open
 						? "border-accent text-ink"
 						: "border-line bg-surface/70 text-muted hover:border-accent hover:text-ink",
@@ -83,7 +83,7 @@ export default function MobileNav() {
 				aria-hidden="true"
 				onClick={() => setOpen(false)}
 				className={cn(
-					"absolute left-0 top-0 z-10 h-dvh w-full bg-black/70 transition-opacity duration-300",
+					"absolute left-0 top-0 z-10 h-dvh w-full cursor-pointer bg-black/70 transition-opacity duration-300",
 					open ? "opacity-100" : "pointer-events-none opacity-0",
 				)}
 			/>
@@ -111,41 +111,41 @@ export default function MobileNav() {
 				<nav aria-label="Mobile" className="flex-1 overflow-y-auto px-6 py-4">
 					<ul>
 						{site.nav.map((link, index) => {
-								const active =
-										pathname === link.href ||
-										(link.href !== "/" && pathname.startsWith(link.href));
-								return (
-									<li
-										key={link.href}
-										className={open ? "drawer-item" : undefined}
-										style={{ animationDelay: `${0.05 + index * 0.07}s` }}
+							const active =
+								pathname === link.href ||
+								(link.href !== "/" && pathname.startsWith(link.href));
+							return (
+								<li
+									key={link.href}
+									className={open ? "drawer-item" : undefined}
+									style={{ animationDelay: `${0.05 + index * 0.07}s` }}
+								>
+									<Link
+										ref={index === 0 ? firstLinkRef : undefined}
+										href={link.href}
+										onClick={() => setOpen(false)}
+										aria-current={active ? "page" : undefined}
+										className={cn(
+											"flex cursor-pointer items-center justify-between border-b border-line py-4 font-display text-xl tracking-tight transition-colors duration-200",
+											active ? "text-accent" : "text-ink hover:text-accent",
+										)}
 									>
-										<Link
-											ref={index === 0 ? firstLinkRef : undefined}
-											href={link.href}
-											onClick={() => setOpen(false)}
-											aria-current={active ? "page" : undefined}
+										{link.label}
+										<svg
+											viewBox="0 0 20 20"
+											aria-hidden="true"
 											className={cn(
-																"flex items-center justify-between border-b border-line py-4 font-display text-xl tracking-tight transition-colors duration-200",
-																active ? "text-accent" : "text-ink hover:text-accent",
+												"h-4 w-4 fill-current transition-all duration-300",
+												active
+													? "translate-x-0 opacity-100"
+													: "-translate-x-1 opacity-40",
 											)}
 										>
-											{link.label}
-											<svg
-																viewBox="0 0 20 20"
-																aria-hidden="true"
-																className={cn(
-																	"h-4 w-4 fill-current transition-all duration-300",
-																	active
-																		? "translate-x-0 opacity-100"
-																		: "-translate-x-1 opacity-40",
-																)}
-											>
-																<path d="M7.5 4.5L13 10l-5.5 5.5.9.9 6.4-6.4-6.4-6.4z" />
-											</svg>
-										</Link>
-									</li>
-								);
+											<path d="M7.5 4.5L13 10l-5.5 5.5.9.9 6.4-6.4-6.4-6.4z" />
+										</svg>
+									</Link>
+								</li>
+							);
 						})}
 					</ul>
 				</nav>

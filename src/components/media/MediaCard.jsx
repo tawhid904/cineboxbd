@@ -1,13 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
+import MediaBadge from "@/components/ui/MediaBadge";
 import RatingStars from "./RatingStars";
 import CertBadge from "./CertBadge";
 import { tmdbImage, SIZES } from "@/lib/images";
 import { formatRuntime, metaLine } from "@/lib/format";
 
-export default function MediaCard({ item }) {
+/**
+ * MediaCard — horizontal-scroll card with backdrop image.
+ * @param {object} item - normalized card view model
+ * @param {string} [badge] - optional pill label
+ * @param {string} [variant] - optional badge variant (trending, new, upcoming, topRated, nowPlaying)
+ */
+export default function MediaCard({ item, badge, variant }) {
 	if (!item) return null;
-	const href = `/${item.mediaType}/${item.id}`;
+	const href = `/${item.mediaType === "movie" ? "movies" : item.mediaType}/${item.id}`;
 	const meta = metaLine([
 		item.year,
 		item.genres?.length ? item.genres.slice(0, 2).join("/") : null,
@@ -15,21 +22,30 @@ export default function MediaCard({ item }) {
 	]);
 	const backdrop = tmdbImage(item.backdropPath, SIZES.backdrop);
 
+	// Resolve badge/variant from item if not passed as prop
+	const resolvedVariant = variant || item.variant || badge || item.badge || null;
+
 	return (
-		<article className="group w-[258px] shrink-0 snap-start sm:w-[300px] lg:w-[334px]">
-			<Link href={href} className="block focus-visible:outline-offset-4">
+		<article className="group w-64.5 shrink-0 snap-start sm:w-75 lg:w-83.5">
+			<Link href={href} className="block cursor-pointer focus-visible:outline-offset-4">
 				<div className="relative aspect-video overflow-hidden rounded-xl bg-surface ring-1 ring-white/5">
 					{backdrop ? (
 						<Image
 							src={backdrop}
 							alt=""
 							fill
-							sizes="(min-width: 1024px) 334px, (min-width: 640px) 300px, 258px"
+							sizes="(min-width: 1024px) 83.5vw, (min-width: 640px) 75vw, 64.5vw"
 							className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
 						/>
 					) : null}
 					<div className="scrim-b pointer-events-none absolute inset-0 opacity-60" />
-					<div className="absolute left-2.5 top-2.5">
+					{/* MediaBadge chip — top-left */}
+					{resolvedVariant ? (
+						<div className="absolute top-2 left-2 z-10">
+							<MediaBadge variant={resolvedVariant} />
+						</div>
+					) : null}
+					<div className={`absolute ${resolvedVariant ? "right-2.5" : "left-2.5"} top-2.5 z-10`}>
 						<CertBadge cert={item.cert} />
 					</div>
 					{item.trailerKey ? (
