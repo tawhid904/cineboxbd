@@ -95,10 +95,10 @@ export default function CtaBanner() {
 				</div>
 				<Link
 					href="/movies"
-					className="inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:bg-accent-hover"
+					className="inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:bg-accent-hover whitespace-nowrap truncate min-w-0 max-w-full"
 				>
-					<span>Browse the catalogue</span>
-					<svg viewBox="0 0 20 20" className="h-4 w-4 fill-current" aria-hidden="true">
+					<span className="whitespace-nowrap truncate">Browse the catalogue</span>
+					<svg viewBox="0 0 20 20" className="h-4 w-4 fill-current shrink-0" aria-hidden="true">
 						<path d="M7.5 4.5L13 10l-5.5 5.5.9.9 6.4-6.4-6.4-6.4z" />
 					</svg>
 				</Link>

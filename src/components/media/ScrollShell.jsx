@@ -9,9 +9,9 @@ function ControlButton({ dir, label, onClick }) {
 			type="button"
 			onClick={onClick}
 			aria-label={label}
-			className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-line bg-surface text-muted transition hover:border-accent hover:text-ink"
+			className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-line bg-surface text-muted transition hover:border-accent hover:text-ink"
 		>
-			<svg viewBox="0 0 20 20" className="h-4 w-4 fill-current" aria-hidden="true">
+			<svg viewBox="0 0 20 20" className="h-4 w-4 fill-current shrink-0" aria-hidden="true">
 				{dir === "prev" ? (
 					<path d="M12.5 4.5L7 10l5.5 5.5-.9.9L5.2 10l6.4-6.4z" />
 				) : (

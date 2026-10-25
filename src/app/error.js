@@ -22,15 +22,15 @@ export default function Error({ error, reset }) {
 				<button
 					type="button"
 					onClick={reset}
-					className="cursor-pointer rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:bg-accent-hover"
+					className="cursor-pointer rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:bg-accent-hover whitespace-nowrap truncate min-w-0 max-w-full"
 				>
-					Try again
+					<span className="whitespace-nowrap truncate">Try again</span>
 				</button>
 				<Link
 					href="/"
-					className="cursor-pointer rounded-full border border-line bg-surface px-6 py-3 text-sm font-semibold text-ink transition hover:border-accent"
+					className="cursor-pointer rounded-full border border-line bg-surface px-6 py-3 text-sm font-semibold text-ink transition hover:border-accent whitespace-nowrap truncate min-w-0 max-w-full"
 				>
-					Back home
+					<span className="whitespace-nowrap truncate">Back home</span>
 				</Link>
 			</div>
 		</div>

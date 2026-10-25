@@ -85,6 +85,7 @@ export default async function HomePage() {
 				.slice(0, 3),
 			media_type: item.media_type || "movie",
 			variant,
+			vote_average: item.vote_average ? Number(item.vote_average.toFixed(1)) : null,
 		}));
 
 	const heroGroups = [

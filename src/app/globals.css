@@ -55,6 +55,51 @@
 			transition-duration: 0.01ms !important;
 		}
 	}
+
+	/* Universal button responsiveness: no text break, no white-space wrapping, ellipsis if space is constricted */
+	button {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		max-width: 100%;
+	}
+
+	button svg {
+		flex-shrink: 0;
+	}
+
+	button > span {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		min-width: 0;
+		max-width: 100%;
+	}
+
+	.btn,
+	.btn-pill,
+	a.btn {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		max-width: 100%;
+	}
+
+	.btn svg,
+	.btn-pill svg,
+	a.btn svg {
+		flex-shrink: 0;
+	}
+
+	.btn > span,
+	.btn-pill > span,
+	a.btn > span {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		min-width: 0;
+		max-width: 100%;
+	}
 }
 
 /* Page gutter container: one source of truth for horizontal rhythm */

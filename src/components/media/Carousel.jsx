@@ -13,9 +13,9 @@ function ControlButton({ dir, label, onClick }) {
 			type="button"
 			onClick={onClick}
 			aria-label={label}
-			className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-line bg-surface text-muted transition hover:border-accent hover:text-ink"
+			className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-line bg-surface text-muted transition hover:border-accent hover:text-ink"
 		>
-			<svg viewBox="0 0 20 20" className="h-4 w-4 fill-current" aria-hidden="true">
+			<svg viewBox="0 0 20 20" className="h-4 w-4 fill-current shrink-0" aria-hidden="true">
 				{dir === "prev" ? (
 					<path d="M12.5 4.5L7 10l5.5 5.5-.9.9L5.2 10l6.4-6.4z" />
 				) : (
@@ -88,10 +88,10 @@ export default function Carousel({
 					{viewAllHref ? (
 						<Link
 							href={viewAllHref}
-							className="inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-accent transition hover:text-accent-hover"
+							className="inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-accent transition hover:text-accent-hover whitespace-nowrap truncate min-w-0 max-w-full"
 						>
-							<span>{viewAllLabel}</span>
-							<svg viewBox="0 0 20 20" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
+							<span className="whitespace-nowrap truncate">{viewAllLabel}</span>
+							<svg viewBox="0 0 20 20" className="h-3.5 w-3.5 fill-current shrink-0" aria-hidden="true">
 								<path d="M7.5 4.5L13 10l-5.5 5.5.9.9 6.4-6.4-6.4-6.4z" />
 							</svg>
 						</Link>

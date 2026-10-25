@@ -3,7 +3,6 @@ import {
 	discoverMovies,
 	discoverTv,
 	getGenreList,
-	searchByType,
 } from "@/lib/tmdb/endpoints";
 import { normalizeCard } from "@/lib/tmdb/normalize";
 import { SORTS } from "@/config/site";
@@ -17,13 +16,12 @@ import EmptyState from "@/components/ui/EmptyState";
 const VALID_SORTS = Object.keys(SORTS.movie);
 
 function parseValues(sp, mediaType) {
-	const q = typeof sp.q === "string" ? sp.q.trim() : "";
 	const genre = typeof sp.genre === "string" ? sp.genre : "";
 	const sortKey = typeof sp.sort === "string" ? sp.sort : "popularity";
 	const sort = VALID_SORTS.includes(sortKey) ? sortKey : "popularity";
 	const view = sp.view === "list" ? "list" : "grid";
 	const page = Math.min(500, Math.max(1, Number.parseInt(sp.page, 10) || 1));
-	return { q, genre, sort, view, page, mediaType };
+	return { genre, sort, view, page, mediaType };
 }
 
 /**
@@ -42,13 +40,11 @@ export default async function BrowseCollection({ mediaType, searchParams }) {
 		genres.genres.map((genre) => [genre.id, genre.name]),
 	);
 
-	const data = values.q
-		? await searchByType(mediaType, values.q, values.page)
-		: await (isMovie ? discoverMovies : discoverTv)({
-				genres: values.genre || undefined,
-				sort: sortMap[values.sort],
-				page: values.page,
-			});
+	const data = await (isMovie ? discoverMovies : discoverTv)({
+		genres: values.genre || undefined,
+		sort: sortMap[values.sort],
+		page: values.page,
+	});
 
 	const cards = data.results
 		.map((result) => {
@@ -57,7 +53,6 @@ export default async function BrowseCollection({ mediaType, searchParams }) {
 			const variant = determineMediaVariant({
 				releaseDate: card.releaseDate,
 				sort: values.sort,
-				isSearch: Boolean(values.q),
 			});
 			return { ...card, variant };
 		})
@@ -65,7 +60,6 @@ export default async function BrowseCollection({ mediaType, searchParams }) {
 
 	const makeHref = (page) => {
 		const params = new URLSearchParams();
-		if (values.q) params.set("q", values.q);
 		if (values.genre) params.set("genre", values.genre);
 		if (values.sort !== "popularity") params.set("sort", values.sort);
 		if (values.view !== "grid") params.set("view", values.view);
@@ -80,16 +74,10 @@ export default async function BrowseCollection({ mediaType, searchParams }) {
 					{isMovie ? "Movies" : "TV Shows"}
 				</p>
 				<h1 className="font-display text-[clamp(1.9rem,4vw,3rem)] leading-tight text-ink">
-					{values.q
-						? `Results for “${values.q}”`
-						: isMovie
-								? "Browse movies"
-								: "Browse series"}
+					{isMovie ? "Browse movies" : "Browse series"}
 				</h1>
 				<p className="mt-2 text-sm leading-relaxed text-muted">
-					{values.q
-						? `Matched in ${isMovie ? "movies" : "TV shows"}.`
-						: "Filter by genre, sort a few ways, open anything for trailers, cast and ratings."}
+					Filter by genre, sort a few ways, open anything for trailers, cast and ratings.
 				</p>
 			</header>
 
@@ -107,7 +95,7 @@ export default async function BrowseCollection({ mediaType, searchParams }) {
 			{cards.length === 0 ? (
 				<EmptyState
 					title="Nothing matched"
-					body="Try a different search term, or clear the filters to start over."
+					body="Try clearing the filters to start over."
 				/>
 			) : values.view === "list" ? (
 				<div className="space-y-4">
