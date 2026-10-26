@@ -4,7 +4,8 @@ import ContinueWatchingRow from "@/components/home/ContinueWatchingRow";
 import GenreCollageSection from "@/components/home/GenreCollageSection";
 import CtaBanner from "@/components/home/CtaBanner";
 import Carousel from "@/components/media/Carousel";
-import { hasTmdbCredentials } from "@/lib/tmdb/client";
+import { cacheLife, cacheTag } from "next/cache";
+import { hasTmdbCredentials, tmdbFetch } from "@/lib/tmdb/client";
 import {
 	discoverMovies,
 	getGenreCollage,
@@ -23,7 +24,7 @@ export const metadata = {
 	title: 'CineboxBD | Watch Movies & Series Online Bangladesh',
 	description: 'Discover trending movies and top-rated TV series on CineboxBD. Browse by genre, rating, and release date. Your ultimate movie discovery site in Bangladesh.',
 	keywords: ['watch movies online Bangladesh', 'movies online BD', 'trending movies', 'best series to watch'],
-	alternates: { canonical: '/' },
+	alternates: { canonical: 'https://www.cineboxbd.bond' },
 	openGraph: {
 		title: 'CineboxBD | Watch Movies & Series Online Bangladesh',
 		description: 'Discover trending movies and top-rated TV series on CineboxBD.',
@@ -38,13 +39,53 @@ export const metadata = {
 	},
 };
 
+/**
+ * Cached helper to fetch candidate upcoming movies strictly releasing in the future.
+ * Cached for hours and revalidates automatically as dates progress.
+ */
+async function getFutureUpcomingMovies() {
+	"use cache";
+	cacheLife("hours");
+	cacheTag("movies:upcoming:future");
+
+	const today = new Date().toISOString().split("T")[0];
+
+	const [upcomingRaw, discoverUpcoming] = await Promise.all([
+		getUpcomingMovies(),
+		tmdbFetch("/discover/movie", {
+			params: {
+				sort_by: "popularity.desc",
+				"primary_release_date.gte": today,
+				include_adult: false,
+			},
+			life: "hours",
+			tag: `discover:upcoming:${today}`,
+		}),
+	]);
+
+	const seen = new Set();
+	const futureMovies = [];
+	for (const item of [
+		...(discoverUpcoming?.results || []),
+		...(upcomingRaw?.results || []),
+	]) {
+		if (!item || !item.id || seen.has(item.id)) continue;
+		seen.add(item.id);
+		const releaseDate = item.release_date || item.first_air_date;
+		if (!releaseDate || releaseDate <= today) continue;
+		futureMovies.push(item);
+	}
+
+	return futureMovies;
+}
+
 export default async function HomePage() {
 	if (!hasTmdbCredentials()) return <ApiKeyNotice />;
 
 	const [
 		trendingRaw,
 		nowPlayingRaw,
-		upcomingRaw,
+		upcomingCandidates,
 		popularMovies,
 		popularTv,
 		genreMap,
@@ -53,7 +94,7 @@ export default async function HomePage() {
 	] = await Promise.all([
 		getTrending("movie", "week"),
 		getNowPlayingMovies(),
-		getUpcomingMovies(),
+		getFutureUpcomingMovies(),
 		getPopularMovies(),
 		getPopularTv(),
 		getGenreMap(),
@@ -71,22 +112,37 @@ export default async function HomePage() {
 		),
 	]);
 
+	// Filter upcoming movies: upcoming cannot be in trending or new movies
+	const trendingIds = new Set((trendingRaw?.results || []).map((m) => m.id));
+	const nowPlayingIds = new Set((nowPlayingRaw?.results || []).map((m) => m.id));
+
+	const cleanUpcomingMovies = upcomingCandidates.filter(
+		(item) => !trendingIds.has(item.id) && !nowPlayingIds.has(item.id),
+	);
+
+	const cleanUpcomingRaw = {
+		results: cleanUpcomingMovies,
+	};
+
 	// Build 3 hero groups of 6 items with genres and variant badges
 	const mapHeroMovies = (items, variant) =>
-		(items || []).slice(0, 6).map((item) => ({
-			id: item.id,
-			title: item.title || item.name,
-			backdrop_path: item.backdrop_path,
-			poster_path: item.poster_path,
-			release_date: item.release_date || item.first_air_date,
-			genres: (item.genre_ids || [])
-				.map((gid) => genreMap.movie?.[gid] || genreMap.tv?.[gid])
-				.filter(Boolean)
-				.slice(0, 3),
-			media_type: item.media_type || "movie",
-			variant,
-			vote_average: item.vote_average ? Number(item.vote_average.toFixed(1)) : null,
-		}));
+		(items || [])
+			.filter((item) => Boolean(item?.backdrop_path))
+			.slice(0, 6)
+			.map((item) => ({
+				id: item.id,
+				title: item.title || item.name,
+				backdrop_path: item.backdrop_path,
+				poster_path: item.poster_path,
+				release_date: item.release_date || item.first_air_date,
+				genres: (item.genre_ids || [])
+					.map((gid) => genreMap.movie?.[gid] || genreMap.tv?.[gid])
+					.filter(Boolean)
+					.slice(0, 3),
+				media_type: item.media_type || "movie",
+				variant,
+				vote_average: item.vote_average ? Number(item.vote_average.toFixed(1)) : null,
+			}));
 
 	const heroGroups = [
 		{
@@ -102,19 +158,16 @@ export default async function HomePage() {
 		{
 			label: "Upcoming",
 			variant: "upcoming",
-			movies: mapHeroMovies(upcomingRaw.results, "upcoming"),
+			movies: mapHeroMovies(cleanUpcomingMovies, "upcoming"),
 		},
 	].filter((g) => g.movies.length > 0);
 
 	const movieCards = (list, defaultVariant) =>
-		(list.results || [])
+		(list?.results || [])
 			.map((item) => {
 				const card = normalizeCard(item, "movie", genreMap);
 				if (!card) return null;
-				const variant = defaultVariant
-					? determineMediaVariant({ releaseDate: card.releaseDate, defaultVariant })
-					: undefined;
-				return { ...card, variant };
+				return { ...card, variant: defaultVariant };
 			})
 			.filter(Boolean);
 
@@ -169,7 +222,7 @@ export default async function HomePage() {
 				<Carousel
 					title="Upcoming Releases"
 					sub="Anticipated films arriving soon."
-					items={movieCards(upcomingRaw, "upcoming")}
+					items={movieCards(cleanUpcomingRaw, "upcoming")}
 					viewAllHref="/movies"
 					viewAllLabel="See all"
 				/>

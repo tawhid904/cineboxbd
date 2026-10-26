@@ -12,5 +12,13 @@ module.exports = {
             { userAgent: '*', disallow: ['/api/', '/_next/'] },
         ],
     },
-    exclude: ['/api/*', '/_next/*'],
+    exclude: [
+        '/apple-icon.png',
+        '/icon0.svg',
+        '/icon1.png',
+        '/manifest.json',
+        '/favicon.ico',
+        '/api/*',
+        '/_next/*',
+    ],
 }

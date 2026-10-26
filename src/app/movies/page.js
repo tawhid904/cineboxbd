@@ -8,7 +8,7 @@ export const metadata = {
 	title: 'Movies',
 	description: 'Browse and discover the latest movies online. Filter by genre, rating, release year, and popularity. Find your next favourite film on CineboxBD Bangladesh.',
 	keywords: ['latest movies online BD', 'browse movies by genre', 'top rated movies', 'new movie releases Bangladesh'],
-	alternates: { canonical: '/movies' },
+	alternates: { canonical: 'https://www.cineboxbd.bond/movies' },
 	openGraph: {
 		title: 'Browse Movies | CineboxBD',
 		description: 'Browse and filter movies by genre, rating and release date.',

@@ -60,7 +60,7 @@ export const metadata = {
 		description: 'CineboxBD is your go-to movie and TV series discovery site in Bangladesh.',
 		images: ['/preview.png'],
 	},
-	alternates: { canonical: '/' },
+	alternates: { canonical: 'https://www.cineboxbd.bond' },
 };
 
 export const viewport = {

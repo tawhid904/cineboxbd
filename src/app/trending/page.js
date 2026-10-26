@@ -12,7 +12,7 @@ export const metadata = {
 	title: 'Trending',
 	description: "See what movies and TV shows are trending right now in Bangladesh. Search CineboxBD's full catalogue of films and series.",
 	keywords: ['trending movies Bangladesh', 'most popular movies right now', 'trending series this week', 'movie search online'],
-	alternates: { canonical: '/trending' },
+	alternates: { canonical: 'https://www.cineboxbd.bond/trending' },
 	openGraph: {
 		title: 'Trending Now | CineboxBD',
 		description: "See what's trending in movies and TV today. Search the full catalogue.",

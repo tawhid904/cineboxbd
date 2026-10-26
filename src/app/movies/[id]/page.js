@@ -1,3 +1,4 @@
+import MovieJsonLd from "@/components/seo/MovieJsonLd";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import ApiKeyNotice from "@/components/ui/ApiKeyNotice";
@@ -60,7 +61,7 @@ export async function generateMetadata({ params }) {
 				`${details.title} Bangladesh`,
 				'movies online BD',
 			],
-			alternates: { canonical: `/movies/${numericId}` },
+			alternates: { canonical: `https://www.cineboxbd.bond/movies/${numericId}` },
 			openGraph: {
 				title: `${details.title} | CineboxBD`,
 				description: overview,
@@ -109,28 +110,6 @@ async function MovieDetailContent({ params }) {
 
 	const facts = buildFacts(item, crew);
 
-	const movieSchema = {
-		'@context': 'https://schema.org',
-		'@type': 'Movie',
-		name: details.title,
-		description: details.overview,
-		image: details.poster_path
-			? `https://image.tmdb.org/t/p/w500${details.poster_path}`
-			: undefined,
-		datePublished: details.release_date,
-		genre: details.genres?.map((g) => g.name),
-		aggregateRating: details.vote_count > 0
-			? {
-					'@type': 'AggregateRating',
-					ratingValue: details.vote_average.toFixed(1),
-					bestRating: '10',
-					worstRating: '0',
-					ratingCount: details.vote_count,
-			  }
-			: undefined,
-		url: `https://www.cineboxbd.bond/movies/${details.id}`,
-	};
-
 	const breadcrumbSchema = {
 		'@context': 'https://schema.org',
 		'@type': 'BreadcrumbList',
@@ -143,10 +122,7 @@ async function MovieDetailContent({ params }) {
 
 	return (
 		<>
-			<script
-				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(movieSchema) }}
-			/>
+			<MovieJsonLd movie={details} />
 			<script
 				type="application/ld+json"
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}

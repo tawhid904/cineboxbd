@@ -1,3 +1,4 @@
+import TVJsonLd from "@/components/seo/TVJsonLd";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import ApiKeyNotice from "@/components/ui/ApiKeyNotice";
@@ -60,7 +61,7 @@ export async function generateMetadata({ params }) {
 				`${details.name} Bangladesh`,
 				'watch TV series online Bangladesh',
 			],
-			alternates: { canonical: `/tv/${numericId}` },
+			alternates: { canonical: `https://www.cineboxbd.bond/tv/${numericId}` },
 			openGraph: {
 				title: `${details.name} | CineboxBD`,
 				description: overview,
@@ -113,30 +114,6 @@ async function TvDetailContent({ params }) {
 		{ label: "Episodes", value: item.episodes },
 	];
 
-	const tvSchema = {
-		'@context': 'https://schema.org',
-		'@type': 'TVSeries',
-		name: details.name,
-		description: details.overview,
-		image: details.poster_path
-			? `https://image.tmdb.org/t/p/w500${details.poster_path}`
-			: undefined,
-		datePublished: details.first_air_date,
-		numberOfSeasons: details.number_of_seasons,
-		numberOfEpisodes: details.number_of_episodes,
-		genre: details.genres?.map((g) => g.name),
-		aggregateRating: details.vote_count > 0
-			? {
-					'@type': 'AggregateRating',
-					ratingValue: details.vote_average.toFixed(1),
-					bestRating: '10',
-					worstRating: '0',
-					ratingCount: details.vote_count,
-			  }
-			: undefined,
-		url: `https://www.cineboxbd.bond/tv/${details.id}`,
-	};
-
 	const breadcrumbSchema = {
 		'@context': 'https://schema.org',
 		'@type': 'BreadcrumbList',
@@ -149,10 +126,7 @@ async function TvDetailContent({ params }) {
 
 	return (
 		<>
-			<script
-				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(tvSchema) }}
-			/>
+			<TVJsonLd show={details} />
 			<script
 				type="application/ld+json"
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
