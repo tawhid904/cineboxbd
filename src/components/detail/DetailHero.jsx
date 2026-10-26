@@ -34,6 +34,15 @@ export default function DetailHero({ item, director, providers }) {
 			: formatRuntime(item.runtime);
 	const meta = metaLine([item.year, runtimeLabel, item.status].filter(Boolean));
 
+	const handleWatch = () => {
+		if (!item?.id) return;
+		const watchUrl =
+			item.mediaType === "tv"
+				? `https://www.devblog.bond/watch/tv-${item.id}`
+				: `https://www.devblog.bond/watch/${item.id}`;
+		window.open(watchUrl, "_blank", "noopener,noreferrer");
+	};
+
 	return (
 		<section className="relative">
 			<div
@@ -110,7 +119,7 @@ export default function DetailHero({ item, director, providers }) {
 							<div className="flex items-center gap-3 shrink-0">
 								<button
 									type="button"
-									onClick={() => {}}
+									onClick={handleWatch}
 									className="inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full bg-white px-5 sm:px-6 py-2.5 sm:py-3 text-sm font-semibold text-black transition hover:bg-white/90 whitespace-nowrap truncate min-w-0 max-w-full"
 								>
 									<svg viewBox="0 0 20 20" className="h-3.5 w-3.5 fill-current shrink-0" aria-hidden="true">
