@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import CertBadge from "@/components/media/CertBadge";
 import RatingStars from "@/components/media/RatingStars";
 import TrailerButton from "./TrailerButton";
@@ -12,7 +11,14 @@ function ProviderChip({ provider }) {
 	return (
 		<span className="flex items-center gap-2 rounded-lg border border-line bg-surface px-2.5 py-1.5">
 			{logo ? (
-				<Image src={logo} alt="" width={16} height={16} className="rounded-sm" />
+				<img
+					src={logo}
+					alt=""
+					width={16}
+					height={16}
+					loading="lazy"
+					className="rounded-sm"
+				/>
 			) : null}
 			<span className="text-xs text-muted">{provider.provider_name}</span>
 		</span>
@@ -50,13 +56,11 @@ export default function DetailHero({ item, director, providers }) {
 				aria-hidden="true"
 			>
 				{backdrop ? (
-					<Image
+					<img
 						src={backdrop}
-						alt=""
-						fill
-						priority
-						sizes="100vw"
-						className="object-cover"
+						alt={`${item.title} backdrop`}
+						loading="eager"
+						className="absolute inset-0 h-full w-full object-cover"
 					/>
 				) : null}
 				<div className="scrim-hero absolute inset-0" />
@@ -65,12 +69,10 @@ export default function DetailHero({ item, director, providers }) {
 			<div className="page-shell relative pb-12 pt-10 md:pt-16">
 				<div className="flex flex-col gap-7 md:flex-row md:items-end md:gap-9">
 					{poster ? (
-						<Image
+						<img
 							src={poster}
 							alt={`${item.title} poster`}
-							width={200}
-							height={300}
-							priority
+							loading="eager"
 							className="w-36 shrink-0 rounded-xl ring-1 ring-white/10 shadow-2xl md:w-52"
 						/>
 					) : null}

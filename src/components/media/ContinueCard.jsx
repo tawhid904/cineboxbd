@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { tmdbImage, SIZES } from "@/lib/images";
 import { relativeTime } from "@/lib/watchlist";
@@ -14,12 +13,11 @@ export default function ContinueCard({ item }) {
 			<Link href={href} className="block cursor-pointer focus-visible:outline-offset-4">
 				<div className="relative aspect-video overflow-hidden rounded-xl bg-surface ring-1 ring-white/5">
 					{backdrop ? (
-						<Image
+						<img
 							src={backdrop}
-							alt=""
-							fill
-							sizes="(min-width: 1024px) 83.5vw, (min-width: 640px) 75vw, 64.5vw"
-							className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
+							alt={item.title}
+							loading="lazy"
+							className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
 						/>
 					) : null}
 					<div className="scrim-b pointer-events-none absolute inset-0 opacity-75" />

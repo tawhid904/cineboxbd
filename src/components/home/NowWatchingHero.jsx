@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Skeleton from "react-loading-skeleton";
 import MediaBadge from "@/components/ui/MediaBadge";
@@ -144,13 +143,11 @@ export default function NowWatchingHero({ groups = [], isLoading = false }) {
 			{/* Ambient blurred backdrop behind cards */}
 			<div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
 				{centerBackdrop && (
-					<Image
+					<img
 						src={centerBackdrop}
 						alt=""
-						fill
-						priority
-						sizes="100vw"
-						className="object-cover blur-3xl opacity-25 scale-110 transition-opacity duration-700 ease-in-out"
+						loading="eager"
+						className="absolute inset-0 h-full w-full object-cover blur-3xl opacity-25 scale-110 transition-opacity duration-700 ease-in-out"
 					/>
 				)}
 				{/* Ambient radial red cinema backlight behind center card on desktop */}
@@ -203,13 +200,11 @@ export default function NowWatchingHero({ groups = [], isLoading = false }) {
 								}`}
 							>
 								{backdrop ? (
-									<Image
+									<img
 										src={backdrop}
 										alt={title}
-										fill
-										sizes="(max-width: 768px) 84vw, 400px"
-										priority={isActive}
-										className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
+										loading={isActive ? "eager" : "lazy"}
+										className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
 									/>
 								) : null}
 
@@ -343,12 +338,11 @@ export default function NowWatchingHero({ groups = [], isLoading = false }) {
 							className="absolute right-[calc(50%+min(35vw,420px)+16px)] top-1/2 -translate-y-1/2 z-10 w-64 lg:w-76 xl:w-84 aspect-21/11 rounded-2xl overflow-hidden opacity-45 scale-95 transition-all duration-500 ease-out cursor-pointer hover:opacity-85 hover:scale-100 ring-1 ring-white/10 hover:ring-white/30 shadow-2xl bg-surface group"
 						>
 							{leftBackdrop ? (
-								<Image
+								<img
 									src={leftBackdrop}
 									alt={leftTitle}
-									fill
-									sizes="340px"
-									className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+									loading="lazy"
+									className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
 								/>
 							) : null}
 							<div className="absolute inset-0 bg-linear-to-t from-black/95 via-black/45 to-transparent" />
@@ -385,14 +379,12 @@ export default function NowWatchingHero({ groups = [], isLoading = false }) {
 						className="relative z-20 w-full md:w-[700px] lg:w-[820px] xl:w-[920px] aspect-[16/9] md:aspect-[2.1/1] max-h-[460px] rounded-3xl overflow-hidden shadow-[0_25px_60px_-12px_rgba(0,0,0,0.95),0_0_45px_rgba(229,39,47,0.18)] ring-1 ring-inset ring-white/20 border border-white/10 cursor-pointer scale-100 opacity-100 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] group bg-surface"
 					>
 						{centerBackdrop ? (
-							<Image
+							<img
 								src={centerBackdrop}
 								alt={centerTitle}
-								fill
-								priority
+								loading="eager"
 								onLoad={() => setIsTransitioning(false)}
-								sizes="(min-width: 1024px) 920px, 100vw"
-								className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+								className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
 							/>
 						) : null}
 
@@ -493,12 +485,11 @@ export default function NowWatchingHero({ groups = [], isLoading = false }) {
 							className="absolute left-[calc(50%+min(35vw,420px)+16px)] top-1/2 -translate-y-1/2 z-10 w-64 lg:w-76 xl:w-84 aspect-21/11 rounded-2xl overflow-hidden opacity-45 scale-95 transition-all duration-500 ease-out cursor-pointer hover:opacity-85 hover:scale-100 ring-1 ring-white/10 hover:ring-white/30 shadow-2xl bg-surface group"
 						>
 							{rightBackdrop ? (
-								<Image
+								<img
 									src={rightBackdrop}
 									alt={rightTitle}
-									fill
-									sizes="340px"
-									className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+									loading="lazy"
+									className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
 								/>
 							) : null}
 							<div className="absolute inset-0 bg-linear-to-t from-black/95 via-black/45 to-transparent" />

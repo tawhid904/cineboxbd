@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { tmdbImage, SIZES } from "@/lib/images";
 
@@ -45,12 +44,11 @@ export default function GenreCollageSection({ collages }) {
 										key={item.id}
 										className="relative overflow-hidden rounded-[4px]"
 									>
-										<Image
+										<img
 											src={src}
 											alt=""
-											fill
-											sizes="(min-width: 1024px) 23vw, (min-width: 640px) 45vw, 90vw"
-											className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+											loading="lazy"
+											className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
 										/>
 									</div>
 								) : null;

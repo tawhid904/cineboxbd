@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import MediaBadge from "@/components/ui/MediaBadge";
 import RatingStars from "./RatingStars";
@@ -29,12 +28,11 @@ export default function ListCard({ item, variant }) {
 			>
 				<div className="relative aspect-video w-full shrink-0 overflow-hidden rounded-lg bg-surface sm:w-56 lg:w-72">
 					{src ? (
-						<Image
+						<img
 							src={src}
-							alt=""
-							fill
-							sizes="(min-width: 640px) 288px, (min-width: 1024px) 90vw, 100vw"
-							className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+							alt={item.title}
+							loading="lazy"
+							className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
 						/>
 					) : null}
 					{resolvedVariant ? (

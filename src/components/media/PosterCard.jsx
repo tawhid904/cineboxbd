@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import MediaBadge from "@/components/ui/MediaBadge";
 import { tmdbImage, SIZES } from "@/lib/images";
@@ -17,12 +16,11 @@ export default function PosterCard({ item, badge, variant }) {
 			<Link href={href} className="block cursor-pointer focus-visible:outline-offset-4">
 				<div className="relative aspect-2/3 overflow-hidden rounded-lg bg-surface ring-1 ring-white/5">
 					{poster ? (
-						<Image
+						<img
 							src={poster}
 							alt={item.title}
-							fill
-							sizes="(min-width: 1280px) 15vw, (min-width: 768px) 22vw, (min-width: 480px) 31vw, 45vw"
-							className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+							loading="lazy"
+							className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
 						/>
 					) : null}
 					<div className="absolute inset-0 flex items-end justify-center bg-black/65 p-3 opacity-0 transition group-hover:opacity-100">

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import ScrollShell from "@/components/media/ScrollShell";
 import { tmdbImage, SIZES } from "@/lib/images";
 
@@ -16,12 +15,11 @@ export default function CastRow({ cast }) {
 					>
 						<div className="relative aspect-[2/3] overflow-hidden rounded-lg bg-surface ring-1 ring-white/5">
 							{src ? (
-								<Image
+								<img
 									src={src}
 									alt={person.name}
-									fill
-									sizes="(min-width: 640px) 150px, 130px"
-									className="object-cover grayscale transition duration-500 hover:grayscale-0"
+									loading="lazy"
+									className="absolute inset-0 h-full w-full object-cover grayscale transition duration-500 hover:grayscale-0"
 								/>
 							) : null}
 						</div>
